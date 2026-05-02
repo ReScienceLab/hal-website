@@ -10,7 +10,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "lint:design": "npx -y @google/design.md lint DESIGN.md"
+    "lint:design": "bunx @google/design.md lint DESIGN.md"
   },
   "dependencies": {
     "astro": "^6.2.1"
