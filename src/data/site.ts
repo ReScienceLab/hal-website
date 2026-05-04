@@ -67,7 +67,7 @@ export const FEATURES = [
 ] as const;
 
 export const ROUTES = [
-  { path: "/", title: "Hal — Autonomous coding loop for developers", h1: "Write the PRD. Hal ships it.", description: SITE.description, pageType: "Home" },
+  { path: "/", title: "Hal — Autonomous coding loop for developers", h1: "Write the PRD. Hal runs the loop.", description: SITE.description, pageType: "Home" },
   { path: "/docs", title: "Hal Docs - Getting Started with PRD-Driven Coding", h1: "Hal docs and getting started guide", description: "Install Hal, initialize a repo, plan a PRD, validate stories, and run an autonomous coding loop.", pageType: "Docs" },
   { path: "/getting-started", title: "Getting Started with Hal - Install and Run Your First Loop", h1: "Getting started with Hal", description: "A quickstart path for installing Hal and running the first PRD-driven coding loop.", pageType: "Docs" },
   { path: "/features", title: "Hal Features - PRD-Driven AI Coding Automation", h1: "Hal features for autonomous coding loops", description: "Deep dives into Hal planning, fresh context, engine support, standards, archive, and auto pipeline features.", pageType: "Features" },

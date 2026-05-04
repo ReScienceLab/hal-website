@@ -31,7 +31,7 @@ const related = FEATURES.filter((item) => item.slug !== feature.slug).slice(0, 3
       <h2>Why this exists</h2>
       <p>{feature.detail}</p>
       <h2>Where it fits in the Hal loop</h2>
-      <p>Hal is designed around reviewable steps instead of one invisible agent session. This feature supports that loop by making the state, context, or action explicit before the next implementation pass.</p>
+      <p>Hal is designed around reviewable steps instead of one invisible agent session. This feature supports that loop by making the state, context, or next action explicit before another implementation pass begins.</p>
       <pre><code>{`hal plan "describe the product change"
 hal convert
 hal validate

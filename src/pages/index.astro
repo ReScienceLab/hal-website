@@ -532,8 +532,8 @@ import { SITE } from '../data/site';
         <span class="dot"></span>
         v0.4.0
       </div>
-      <h1>Write the PRD.<br>Hal ships it.</h1>
-      <p class="subtitle">An autonomous coding loop that turns your product requirements into commits. Describe what you want. Hal plans the stories, writes the code, and opens the pull request.</p>
+      <h1>Write the PRD.<br>Hal runs the loop.</h1>
+      <p class="subtitle">A terminal-first coding loop that turns product requirements into reviewable implementation passes. Describe the change, let Hal plan the stories, then inspect the commits and reports it leaves behind.</p>
       <div class="hero-actions">
         <a href="#install" class="btn-primary">Get Hal</a>
         <button class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL https://hal.run/install.sh | bash');this.querySelector('.copy').textContent='Copied!'">
@@ -623,7 +623,7 @@ import { SITE } from '../data/site';
         <div class="feature-card">
           <div class="icon">06 //</div>
           <h3>Auto pipeline</h3>
-          <p>One command runs the entire sequence from plan through archive. Deterministic, repeatable, hands-off.</p>
+          <p>Run the sequence from plan through archive as named steps, so every agent pass has state you can inspect.</p>
         </div>
       </div>
     </div>
@@ -665,7 +665,7 @@ import { SITE } from '../data/site';
               <span class="ok">  ✓ Implemented and committed</span><br/>
               <span class="dim">→ US-002: Add theme toggle UI component</span><br/>
               <span class="ok">  ✓ Implemented and committed</span><br/>
-              <span class="ok">All 5 stories shipped. 5 commits. 0 meetings.</span>
+              <span class="ok">All 5 stories complete. 5 commits ready for review.</span>
             </div>
           </div>
         </div>
@@ -677,7 +677,7 @@ import { SITE } from '../data/site';
     <div class="container">
       <div class="section-header">
         <h2>The loop</h2>
-        <p>One deterministic pipeline from idea to shipped code.</p>
+        <p>One named sequence from product intent to reviewable code changes.</p>
       </div>
       <div class="steps">
         <div class="step">
@@ -698,7 +698,7 @@ import { SITE } from '../data/site';
         <div class="step">
           <div class="step-num">STEP 04</div>
           <h3>Ship</h3>
-          <p><code>hal run</code> picks the next story, implements it, commits, and repeats until everything ships.</p>
+          <p><code>hal run</code> picks the next story, implements it, commits, and repeats until the scoped work is ready to review.</p>
         </div>
       </div>
     </div>
@@ -720,8 +720,8 @@ import { SITE } from '../data/site';
 
   <section class="cta" id="install">
     <div class="container">
-      <h2>Hand off the execution.<br>Keep the architecture.</h2>
-      <p>Install Hal in one command and start shipping stories autonomously.</p>
+      <h2>Hand off the loop.<br>Keep the review.</h2>
+      <p>Install Hal, run a small PRD-driven task, and inspect the commits before you merge.</p>
       <div class="hero-actions">
         <button class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL https://hal.run/install.sh | bash');this.querySelector('.copy').textContent='Copied!'">
           <span>curl -fsSL https://hal.run/install.sh | bash</span>

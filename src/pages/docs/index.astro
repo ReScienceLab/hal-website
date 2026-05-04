@@ -21,7 +21,7 @@ const schema = [{
     <div class="page-container">
       <p class="eyebrow">Docs</p>
       <h1>Hal docs and getting started guide</h1>
-      <p>Install Hal, initialize the project workflow, turn requirements into stories, and run the first autonomous coding loop without hiding the review trail.</p>
+      <p>Install Hal, initialize the project workflow, turn requirements into stories, and run a small coding loop that leaves a review trail.</p>
       <div class="btn-row">
         <a class="btn-primary" href={SITE.repoUrl} target="_blank" rel="noreferrer">Read GitHub README</a>
         <a class="btn-ghost" href="/getting-started">Quickstart path</a>
@@ -36,7 +36,7 @@ const schema = [{
       <pre><code>{SITE.installCommand}</code></pre>
 
       <h2>First loop</h2>
-      <p>A small first run should prove the loop rather than hand a giant feature to an agent. Start with a bounded change that has clear acceptance criteria.</p>
+      <p>A small first run should test the loop rather than hand a giant feature to an agent. Start with a bounded change that has clear acceptance criteria.</p>
       <pre><code>{`hal init
 hal plan "add a small settings page with one saved preference"
 hal convert
