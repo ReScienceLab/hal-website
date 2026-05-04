@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { SITE } from "../data/site";
+
+const faqs = [
+  { question: "Is Hal currently a hosted paid product?", answer: "No. This site presents Hal as an open-source CLI. It does not describe a hosted Hal Cloud plan or paid tier today." },
+  { question: "Do I still pay for AI model usage?", answer: "Hal can use external AI coding engines. Any costs or limits from those tools are separate from this website and depend on the engine you configure." },
+  { question: "Where can I inspect the license and source?", answer: `Use the GitHub repository at ${SITE.repoUrl} to inspect the source, license, releases, and docs.` },
+];
+const schema = [{
+  "@type": "FAQPage",
+  "@id": `${SITE.domain}/pricing#faq`,
+  mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })),
+}];
+---
+<Layout title="Hal Pricing - Open Source CLI" description="Hal is an open-source CLI. Review the current install path, GitHub source, and what is not a hosted paid plan today." path="/pricing" schema={schema}>
+  <SiteNav />
+  <section class="page-hero">
+    <div class="page-container">
+      <p class="eyebrow">Pricing</p>
+      <h1>Hal pricing</h1>
+      <p>Hal is currently presented as an open-source CLI. There is no hosted paid Hal plan described on this website today.</p>
+      <div class="btn-row">
+        <a class="btn-primary" href={SITE.repoUrl} target="_blank" rel="noreferrer">Inspect source and license</a>
+        <a class="btn-ghost" href="/docs">Read install docs</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="card-grid">
+        <article class="info-card"><p class="kicker">Current status</p><h3>Open-source CLI</h3><p>Install Hal as a command-line tool and review the repository before adopting it in a project.</p></article>
+        <article class="info-card"><p class="kicker">Separate costs</p><h3>Bring your own engine</h3><p>Hal can work with external coding agents. Any model, IDE, or API cost belongs to the engine provider you choose.</p></article>
+        <article class="info-card"><p class="kicker">No invented tiers</p><h3>No hosted plan described</h3><p>This page does not claim hosted collaboration, usage quotas, SLAs, or commercial tiers that are not documented here.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="section-head center"><h2>FAQ</h2><p>Pricing answers without inventing tiers or limits.</p></div>
+      <div class="faq-list">{faqs.map((faq) => <article class="faq-item"><h3>{faq.question}</h3><p>{faq.answer}</p></article>)}</div>
+    </div>
+  </section>
+  <SiteFooter />
+</Layout>
