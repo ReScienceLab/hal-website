@@ -21,11 +21,18 @@ const canonical = absoluteUrl(path);
 const imageUrl = absoluteUrl(noindex ? "/og/home.svg" : ogImagePath(path));
 const baseGraph: Array<Record<string, unknown>> = [
   {
+    "@type": "Organization",
+    "@id": `${SITE.domain}/#organization`,
+    name: "ReScience Lab",
+    url: "https://rescience.com",
+  },
+  {
     "@type": "WebSite",
     "@id": `${SITE.domain}/#website`,
     name: SITE.name,
     url: SITE.domain,
     description: SITE.description,
+    publisher: { "@id": `${SITE.domain}/#organization` },
   },
   {
     "@type": "SoftwareApplication",
@@ -34,8 +41,17 @@ const baseGraph: Array<Record<string, unknown>> = [
     applicationCategory: "DeveloperApplication",
     operatingSystem: "macOS, Linux",
     url: SITE.repoUrl,
+    sameAs: [SITE.repoUrl, SITE.rescienceUrl],
     description: SITE.description,
     softwareVersion: SITE.version,
+    provider: { "@id": `${SITE.domain}/#organization` },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      url: absoluteUrl("/pricing"),
+      availability: "https://schema.org/InStock",
+    },
   },
   {
     "@type": "WebPage",
@@ -43,6 +59,7 @@ const baseGraph: Array<Record<string, unknown>> = [
     url: canonical,
     name: title,
     description,
+    dateModified: "2026-05-04",
     isPartOf: { "@id": `${SITE.domain}/#website` },
   },
 ];
