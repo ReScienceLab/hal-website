@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 
 const canonical = absoluteUrl(path);
-const imageUrl = absoluteUrl(noindex ? "/og.svg" : ogImagePath(path));
+const imageUrl = absoluteUrl(noindex ? "/og/home.svg" : ogImagePath(path));
 const baseGraph: Array<Record<string, unknown>> = [
   {
     "@type": "WebSite",
