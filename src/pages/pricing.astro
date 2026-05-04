@@ -9,11 +9,23 @@ const faqs = [
   { question: "Do I still pay for AI model usage?", answer: "Hal can use external AI coding engines. Any costs or limits from those tools are separate from this website and depend on the engine you configure." },
   { question: "Where can I inspect the license and source?", answer: `Use the GitHub repository at ${SITE.repoUrl} to inspect the source, license, releases, and docs.` },
 ];
-const schema = [{
-  "@type": "FAQPage",
-  "@id": `${SITE.domain}/pricing#faq`,
-  mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })),
-}];
+const lastUpdated = "2026-05-04";
+const schema = [
+  {
+    "@type": "Offer",
+    "@id": `${SITE.domain}/pricing#offer`,
+    price: "0",
+    priceCurrency: "USD",
+    url: `${SITE.domain}/pricing`,
+    availability: "https://schema.org/InStock",
+    itemOffered: { "@type": "SoftwareApplication", name: SITE.name, url: SITE.repoUrl },
+  },
+  {
+    "@type": "FAQPage",
+    "@id": `${SITE.domain}/pricing#faq`,
+    mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })),
+  },
+];
 ---
 <Layout title="Hal Pricing - Open Source CLI" description="Hal is an open-source CLI. Review the current install path, GitHub source, and what is not a hosted paid plan today." path="/pricing" schema={schema}>
   <SiteNav />
@@ -22,6 +34,7 @@ const schema = [{
       <p class="eyebrow">Pricing</p>
       <h1>Hal pricing</h1>
       <p>Hal is currently presented as an open-source CLI. There is no hosted paid Hal plan described on this website today.</p>
+      <p class="hero-meta">Last updated: {lastUpdated} · <a href="/pricing.md">Read machine-readable pricing</a></p>
       <div class="btn-row">
         <a class="btn-primary" href={SITE.repoUrl} target="_blank" rel="noreferrer">Inspect source and license</a>
         <a class="btn-ghost" href="/docs">Read install docs</a>
@@ -35,6 +48,7 @@ const schema = [{
         <article class="info-card"><p class="kicker">Current status</p><h3>Open-source CLI</h3><p>Install Hal as a command-line tool and review the repository before adopting it in a project.</p></article>
         <article class="info-card"><p class="kicker">Separate costs</p><h3>Bring your own engine</h3><p>Hal can work with external coding agents. Any model, IDE, or API cost belongs to the engine provider you choose.</p></article>
         <article class="info-card"><p class="kicker">No invented tiers</p><h3>No hosted plan described</h3><p>This page does not claim hosted collaboration, usage quotas, SLAs, or commercial tiers that are not documented here.</p></article>
+        <article class="info-card"><p class="kicker">AI-readable</p><h3>Markdown pricing file</h3><p>Use <a href="/pricing.md">/pricing.md</a> for a parseable summary of Hal pricing status, external costs, and adoption caveats.</p></article>
       </div>
     </div>
   </section>
