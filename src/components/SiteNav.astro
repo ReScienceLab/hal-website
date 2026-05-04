@@ -1,0 +1,18 @@
+---
+import { SITE } from "../data/site";
+---
+<nav class="simple-nav">
+  <div class="page-container simple-nav__inner">
+    <a href="/" class="simple-brand" aria-label="Hal home">
+      <span class="simple-brand__eye" aria-hidden="true"></span>
+      <span>hal</span>
+    </a>
+    <div class="simple-nav__links">
+      <a href="/docs">Docs</a>
+      <a href="/features">Features</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/testimonials">Proof</a>
+      <a href={SITE.repoUrl} target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </div>
+</nav>

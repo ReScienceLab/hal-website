@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site';
 ---
 
-<Layout title="Hal — Autonomous coding loop for developers">
+<Layout title="Hal — Autonomous coding loop for developers" description={SITE.description} path="/">
   <style>
     .container {
       max-width: 1200px;
@@ -184,17 +185,30 @@ import Layout from '../layouts/Layout.astro';
       letter-spacing: 0.02em;
     }
     .trust-logos {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      max-width: 860px;
+      margin: 0 auto;
     }
-    .trust-logos span {
-      font-family: var(--font-mono);
+    .trust-card {
+      padding: 18px;
+      text-align: left;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+    }
+    .trust-card strong {
+      display: block;
+      color: var(--text-primary);
       font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .trust-card span {
+      display: block;
       color: var(--text-secondary);
-      opacity: 0.5;
+      font-size: 13px;
+      line-height: 1.45;
     }
 
     /* Terminal */
@@ -502,11 +516,13 @@ import Layout from '../layouts/Layout.astro';
         hal
       </a>
       <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#workflow">Workflow</a>
-        <a href="https://github.com/j-yw/hal" target="_blank">GitHub</a>
+        <a href="/docs">Docs</a>
+        <a href="/features">Features</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/testimonials">Proof</a>
+        <a href={SITE.repoUrl} target="_blank" rel="noreferrer">GitHub</a>
       </div>
-      <a href="#install" class="nav-cta">Install</a>
+      <a href="/getting-started" class="nav-cta">Start</a>
     </div>
   </nav>
 
@@ -525,18 +541,18 @@ import Layout from '../layouts/Layout.astro';
           <span class="copy">Copy</span>
         </button>
       </div>
-      <p class="hero-meta">Or read the <a href="https://github.com/j-yw/hal#readme">documentation</a></p>
+      <p class="hero-meta">Or read the <a href="/docs">documentation</a></p>
     </div>
   </section>
 
   <section class="trust">
     <div class="container">
-      <p class="trust-label">Built for developers who ship</p>
+      <p class="trust-label">Inspectable trust signals — no placeholder logos</p>
       <div class="trust-logos">
-        <span>ReScience</span>
-        <span>NoIdea</span>
-        <span>PageWell</span>
-        <span>KickWatch</span>
+        <a class="trust-card" href={SITE.repoUrl} target="_blank" rel="noreferrer"><strong>Public source</strong><span>Review the Hal repository, README, releases, and license on GitHub.</span></a>
+        <a class="trust-card" href="/docs"><strong>Command-forward docs</strong><span>Install, initialize, plan, convert, validate, and run from a documented CLI loop.</span></a>
+        <a class="trust-card" href="/pricing"><strong>Transparent pricing</strong><span>Open-source CLI status is stated plainly without invented paid tiers.</span></a>
+        <a class="trust-card" href="https://rescience.com/products/hal" target="_blank" rel="noreferrer"><strong>ReScience Lab</strong><span>Part of a one-person-company product stack for agent workflows.</span></a>
       </div>
     </div>
   </section>
@@ -712,7 +728,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="copy">Copy</span>
         </button>
       </div>
-      <p class="hero-meta">Or read the <a href="https://github.com/j-yw/hal#readme">documentation</a></p>
+      <p class="hero-meta">Or read the <a href="/docs">documentation</a></p>
     </div>
   </section>
 
@@ -720,8 +736,8 @@ import Layout from '../layouts/Layout.astro';
     <div class="container footer-inner">
       <div class="left">© 2026 Hal. MIT License.</div>
       <div class="right">
-        <a href="https://github.com/j-yw/hal" target="_blank">GitHub</a>
-        <a href="https://rescience.com" target="_blank">ReScience</a>
+        <a href={SITE.repoUrl} target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://rescience.com" target="_blank" rel="noreferrer">ReScience</a>
       </div>
     </div>
   </footer>

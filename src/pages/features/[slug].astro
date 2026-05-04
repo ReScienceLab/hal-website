@@ -1,0 +1,55 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { FEATURES, SITE } from "../../data/site";
+
+export function getStaticPaths() {
+  return FEATURES.map((feature) => ({ params: { slug: feature.slug }, props: { feature } }));
+}
+
+const { feature } = Astro.props;
+const featureIndex = FEATURES.findIndex((item) => item.slug === feature.slug) + 1;
+const related = FEATURES.filter((item) => item.slug !== feature.slug).slice(0, 3);
+---
+<Layout title={`${feature.title} - Hal Feature`} description={feature.description} path={`/features/${feature.slug}`}>
+  <SiteNav />
+  <section class="page-hero">
+    <div class="page-container">
+      <p class="eyebrow">Feature {String(featureIndex).padStart(2, "0")}</p>
+      <h1>{feature.h1}</h1>
+      <p>{feature.description}</p>
+      <div class="btn-row">
+        <a class="btn-primary" href="/docs">Use it in the loop</a>
+        <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">View GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="page-container prose">
+      <h2>Why this exists</h2>
+      <p>{feature.detail}</p>
+      <h2>Where it fits in the Hal loop</h2>
+      <p>Hal is designed around reviewable steps instead of one invisible agent session. This feature supports that loop by making the state, context, or action explicit before the next implementation pass.</p>
+      <pre><code>{`hal plan "describe the product change"
+hal convert
+hal validate
+hal run`}</code></pre>
+      <h2>How to evaluate it</h2>
+      <ul>
+        <li>The work should be tied to a specific PRD story or command.</li>
+        <li>The output should leave inspectable files, commits, reports, or state.</li>
+        <li>The developer should still review the changes before merging.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="section-head center"><h2>Related features</h2><p>Keep exploring the pieces of the coding loop.</p></div>
+      <div class="card-grid">{related.map((item) => <a class="info-card" href={`/features/${item.slug}`}><h3>{item.title}</h3><p>{item.description}</p></a>)}</div>
+    </div>
+  </section>
+  <SiteFooter />
+</Layout>

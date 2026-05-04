@@ -1,0 +1,17 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+<Layout title="404 - Hal page not found" description="The requested Hal page could not be found." path="/404" noindex={true}>
+  <SiteNav />
+  <section class="page-hero">
+    <div class="page-container">
+      <p class="eyebrow">404</p>
+      <h1>Story not found.</h1>
+      <p>This route is not in the Hal loop. Start with the docs or return to the homepage.</p>
+      <div class="btn-row"><a class="btn-primary" href="/docs">Read docs</a><a class="btn-ghost" href="/">Go home</a></div>
+    </div>
+  </section>
+  <SiteFooter />
+</Layout>
