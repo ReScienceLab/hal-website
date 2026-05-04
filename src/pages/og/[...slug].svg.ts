@@ -30,30 +30,39 @@ function wrapText(value: string, maxLineLength = 20) {
 
 function redSignal() {
   const dots: string[] = [];
-  const centerX = 972;
-  const centerY = 174;
-  for (let row = -16; row <= 18; row += 1) {
-    for (let col = -20; col <= 20; col += 1) {
-      const x = centerX + col * 16;
-      const y = centerY + row * 14;
-      const dx = col / 20;
-      const dy = row / 13;
-      const eye = Math.abs(dy) + Math.abs(dx * dx * 0.85);
-      const ripple = Math.sin(col * 0.7 + row * 0.32) * 0.12;
-      const density = Math.max(0, 1 - eye + ripple);
-      if (density < 0.08 && (row + col) % 5 !== 0) continue;
-      const radius = Math.max(1.1, density * 6.4);
-      const opacity = Math.max(0.05, Math.min(0.48, density * 0.44));
+  const originX = 954;
+  const originY = 178;
+  for (let row = -18; row <= 20; row += 1) {
+    for (let col = -23; col <= 24; col += 1) {
+      const x = originX + col * 15;
+      const y = originY + row * 13;
+      const sweep = Math.abs(row * 0.42 + Math.sin(col * 0.38) * 4.2);
+      const curve = Math.abs(col / 20) + sweep / 14;
+      const wake = Math.max(0, 1 - curve);
+      const drift = Math.max(0, 1 - Math.abs(col - row * 0.62) / 17);
+      const density = Math.max(wake * 0.58, drift * 0.32);
+      if (density < 0.09 && (row + col) % 6 !== 0) continue;
+      const radius = Math.max(0.9, density * 5.8);
+      const opacity = Math.max(0.045, Math.min(0.34, density * 0.38));
       dots.push(`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${radius.toFixed(1)}" fill="#dc2626" fill-opacity="${opacity.toFixed(2)}"/>`);
     }
   }
   return dots.join("\n  ");
 }
 
+function sketchLines() {
+  return [
+    `<path d="M760 170C833 118 1035 111 1150 168" stroke="#dc2626" stroke-opacity="0.26" stroke-width="2" fill="none" stroke-linecap="round"/>`,
+    `<path d="M792 215C870 260 1021 263 1124 207" stroke="#dc2626" stroke-opacity="0.18" stroke-width="2" fill="none" stroke-linecap="round"/>`,
+    `<path d="M728 502C836 434 992 441 1166 352" stroke="#dc2626" stroke-opacity="0.13" stroke-width="2" fill="none" stroke-linecap="round"/>`,
+    `<path d="M748 84C876 143 1004 135 1168 64" stroke="#dc2626" stroke-opacity="0.11" stroke-width="2" fill="none" stroke-linecap="round"/>`,
+  ].join("\n  ");
+}
+
 function commandMist(pageType: string) {
   const rows = ["hal plan", "hal validate", "hal run", "review report archive", pageType.toLowerCase()];
   return rows
-    .map((row, index) => `<text x="760" y="${354 + index * 42}" class="mist">${escapeXml(row)}</text>`)
+    .map((row, index) => `<text x="762" y="${354 + index * 42}" class="mist">${escapeXml(row)}</text>`)
     .join("\n  ");
 }
 
@@ -63,20 +72,16 @@ function svg({ title, pageType }: OgProps) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="1200" height="630" fill="#0a0a0c"/>
-  <path d="M682 0C825 93 957 122 1200 98V630H796C741 497 696 303 682 0Z" fill="#dc2626" fill-opacity="0.055"/>
-  <path d="M790 174C859 96 1086 96 1155 174C1086 252 859 252 790 174Z" stroke="#dc2626" stroke-opacity="0.46" stroke-width="2" fill="none"/>
-  <path d="M696 514C832 430 982 442 1168 352" stroke="#dc2626" stroke-opacity="0.14" stroke-width="2" fill="none"/>
-  <path d="M744 78C874 146 996 139 1172 64" stroke="#dc2626" stroke-opacity="0.13" stroke-width="2" fill="none"/>
+  <path d="M684 0C816 85 955 123 1200 104V630H792C744 486 699 292 684 0Z" fill="#dc2626" fill-opacity="0.052"/>
+  ${sketchLines()}
   ${redSignal()}
-  <circle cx="972" cy="174" r="38" fill="#dc2626"/>
-  <circle cx="972" cy="174" r="14" fill="#0a0a0c" fill-opacity="0.78"/>
   ${commandMist(pageType)}
   <style>
     .brand{font: 500 30px Geist, system-ui, sans-serif; fill: #f0f0f0; letter-spacing: -0.03em;}
     .eyebrow{font: 500 19px 'Geist Mono', ui-monospace, monospace; fill: #8a8f98; letter-spacing: 0.08em; text-transform: uppercase;}
     .title{font: 600 72px Geist, system-ui, sans-serif; fill: #f0f0f0; letter-spacing: -0.055em;}
     .caption{font: 400 24px Geist, system-ui, sans-serif; fill: #8a8f98;}
-    .mist{font: 400 25px 'Geist Mono', ui-monospace, monospace; fill: #dc2626; fill-opacity: 0.18; letter-spacing: 0.03em;}
+    .mist{font: 400 25px 'Geist Mono', ui-monospace, monospace; fill: #dc2626; fill-opacity: 0.16; letter-spacing: 0.03em;}
   </style>
   <text x="76" y="104" class="brand">${escapeXml(SITE.name)}</text>
   <text x="76" y="164" class="eyebrow">${escapeXml(pageType)}</text>
