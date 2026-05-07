@@ -1,10 +1,16 @@
-import type { APIRoute } from "astro";
-import { absoluteUrl } from "../data/site";
+import type { APIRoute } from 'astro';
 
-const aiUserAgents = ["GPTBot", "ChatGPT-User", "PerplexityBot", "ClaudeBot", "anthropic-ai", "Google-Extended", "Bingbot"];
-const groups = ["User-agent: *\nAllow: /", ...aiUserAgents.map((agent) => `User-agent: ${agent}\nAllow: /`)];
+export const GET: APIRoute = async () => {
+  const body = `User-agent: *
+Allow: /
+Disallow: /_astro/
 
-export const GET: APIRoute = () =>
-  new Response(`${groups.join("\n\n")}\n\nSitemap: ${absoluteUrl("/sitemap.xml")}\n`, {
-    headers: { "Content-Type": "text/plain; charset=utf-8" },
+Sitemap: https://hal.resciencelab.ai/sitemap.xml
+`;
+  return new Response(body, {
+    headers: {
+      'Content-Type': 'text/plain',
+      'Cache-Control': 'public, max-age=3600',
+    },
   });
+};
