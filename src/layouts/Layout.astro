@@ -1,10 +1,52 @@
 ---
+import { SITE, absoluteUrl, ogImagePath } from '../data/site';
+
 interface Props {
   title: string;
   description?: string;
+  path?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
 }
 
-const { title, description = "Autonomous AI coding loop CLI. Feed it a PRD, and it ships." } = Astro.props;
+const {
+  title,
+  description = SITE.description,
+  path = Astro.url.pathname,
+  schema,
+  noindex = false,
+} = Astro.props;
+
+const canonicalUrl = absoluteUrl(path);
+const imageUrl = absoluteUrl(ogImagePath(path));
+const extraSchema = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE.domain}/#organization`,
+      name: SITE.name,
+      url: SITE.domain,
+      logo: absoluteUrl('/logo.png'),
+      sameAs: [SITE.repoUrl],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.domain}/#website`,
+      name: SITE.name,
+      url: SITE.domain,
+      description,
+      publisher: { "@id": `${SITE.domain}/#organization` },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${SITE.repoUrl}?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    ...extraSchema,
+  ],
+};
 ---
 
 <!DOCTYPE html>
@@ -14,39 +56,18 @@ const { title, description = "Autonomous AI coding loop CLI. Feed it a PRD, and 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
-  <link rel="canonical" href="https://hal.resciencelab.ai/" />
+  <link rel="canonical" href={canonicalUrl} />
+  {noindex && <meta name="robots" content="noindex" />}
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:url" content="https://hal.resciencelab.ai/" />
+  <meta property="og:url" content={canonicalUrl} />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://hal.resciencelab.ai/og.png" />
+  <meta property="og:image" content={imageUrl} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content="https://hal.resciencelab.ai/og.png" />
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        name: "Hal",
-        url: "https://hal.resciencelab.ai",
-        logo: "https://hal.resciencelab.ai/logo.png",
-        sameAs: ["https://github.com/j-yw/hal"]
-      },
-      {
-        "@type": "WebSite",
-        name: "Hal",
-        url: "https://hal.resciencelab.ai",
-        description: description,
-        potentialAction: {
-          "@type": "SearchAction",
-          target: "https://github.com/j-yw/hal?q={search_term_string}",
-          "query-input": "required name=search_term_string"
-        }
-      }
-    ]
-  })} />
+  <meta name="twitter:image" content={imageUrl} />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />

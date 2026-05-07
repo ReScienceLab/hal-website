@@ -1,20 +1,21 @@
 import type { APIRoute } from 'astro';
+import { ROUTES, absoluteUrl } from '../data/site';
 
 export const GET: APIRoute = async () => {
-  const site = 'https://hal.resciencelab.ai';
   const today = new Date().toISOString().slice(0, 10);
 
-  const pages = [
-    { url: '/', priority: '1.0', changefreq: 'weekly' },
-    { url: '/docs', priority: '0.8', changefreq: 'weekly' },
-  ];
+  const pages = ROUTES.map((route) => ({
+    url: route.path,
+    priority: route.path === '/' ? '1.0' : route.path === '/docs' ? '0.8' : '0.6',
+    changefreq: 'weekly',
+  }));
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${pages
   .map(
     (p) => `  <url>
-    <loc>${site}${p.url}</loc>
+    <loc>${absoluteUrl(p.url)}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>${p.changefreq}</changefreq>
     <priority>${p.priority}</priority>

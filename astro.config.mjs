@@ -4,5 +4,5 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: 'https://hal.resciencelab.ai',
+  site: 'https://hal.rocks',
 });

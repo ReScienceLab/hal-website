@@ -1,6 +1,6 @@
 export const SITE = {
   name: "Hal",
-  domain: "https://hal.resciencelab.ai",
+  domain: "https://hal.rocks",
   description:
     "Hal is a terminal-first CLI for autonomous PRD-driven coding loops with AI agents such as Codex, Claude Code, and Pi.",
   repoUrl: "https://github.com/ReScienceLab/hal",
