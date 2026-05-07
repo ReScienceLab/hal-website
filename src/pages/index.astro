@@ -190,11 +190,13 @@ import Layout from '../layouts/Layout.astro';
       gap: 32px;
       flex-wrap: wrap;
     }
-    .trust-logos span {
-      font-family: var(--font-mono);
-      font-size: 14px;
-      color: var(--text-secondary);
-      opacity: 0.5;
+    .trust-logos a {
+      display: inline-flex;
+      align-items: center;
+    }
+    .trust-logos img {
+      height: 24px;
+      width: auto;
     }
 
     /* Terminal */
@@ -504,6 +506,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#workflow">Workflow</a>
+        <a href="/docs">Docs</a>
         <a href="https://github.com/j-yw/hal" target="_blank">GitHub</a>
       </div>
       <a href="#install" class="nav-cta">Install</a>
@@ -533,10 +536,9 @@ import Layout from '../layouts/Layout.astro';
     <div class="container">
       <p class="trust-label">Built for developers who ship</p>
       <div class="trust-logos">
-        <span>ReScience</span>
-        <span>NoIdea</span>
-        <span>PageWell</span>
-        <span>KickWatch</span>
+        <a href="https://github.com/j-yw/hal" target="_blank" rel="noopener noreferrer" aria-label="Hal on GitHub">
+          <img src="https://img.shields.io/github/stars/j-yw/hal?style=social" alt="GitHub stars" loading="lazy" />
+        </a>
       </div>
     </div>
   </section>

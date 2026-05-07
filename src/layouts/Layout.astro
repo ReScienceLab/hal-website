@@ -14,6 +14,39 @@ const { title, description = "Autonomous AI coding loop CLI. Feed it a PRD, and 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href="https://hal.resciencelab.ai/" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content="https://hal.resciencelab.ai/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://hal.resciencelab.ai/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://hal.resciencelab.ai/og.png" />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        name: "Hal",
+        url: "https://hal.resciencelab.ai",
+        logo: "https://hal.resciencelab.ai/logo.png",
+        sameAs: ["https://github.com/j-yw/hal"]
+      },
+      {
+        "@type": "WebSite",
+        name: "Hal",
+        url: "https://hal.resciencelab.ai",
+        description: description,
+        potentialAction: {
+          "@type": "SearchAction",
+          target: "https://github.com/j-yw/hal?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  })} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
