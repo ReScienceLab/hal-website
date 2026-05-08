@@ -4,15 +4,15 @@ import SiteNav from "../components/SiteNav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { SITE } from "../data/site";
 ---
-<Layout title="Hal Proof - Source, License, and Trust Signals" description="Real trust signals for Hal: source repository, MIT license, docs, ReScience Lab context, and transparent product status." path="/testimonials">
+<Layout title="Hal Proof - Inspectable Trust Signals" description="Hal trust signals without fake logos or invented metrics: source code, MIT license, docs, ReScience Lab context, and transparent product status." path="/testimonials">
   <SiteNav />
   <section class="page-hero">
     <div class="page-container">
       <p class="eyebrow">Proof</p>
-      <h1>Hal proof and trust signals</h1>
-      <p>Before you hand code to an agent loop, you should know what you can inspect. Start with the source, docs, license, and product context—not placeholder logos or invented metrics.</p>
+      <h1>Proof you can inspect</h1>
+      <p>Before you hand code to an agent loop, you should know what can be verified. Hal uses source, docs, license, commands, and reviewable output—not fake logos or invented adoption metrics.</p>
       <div class="btn-row">
-        <a class="btn-primary" href={SITE.repoUrl} target="_blank" rel="noreferrer">View source on GitHub</a>
+        <a class="btn-primary" href={SITE.repoUrl} target="_blank" rel="noreferrer">Inspect source on GitHub</a>
         <a class="btn-ghost" href={SITE.rescienceUrl} target="_blank" rel="noreferrer">Hal on ReScience</a>
       </div>
     </div>
@@ -23,18 +23,18 @@ import { SITE } from "../data/site";
       <div class="card-grid">
         <article class="info-card"><p class="kicker">Source</p><h3>Public GitHub repository</h3><p>Review the code, README, releases, issues, and license directly instead of trusting a marketing badge.</p></article>
         <article class="info-card"><p class="kicker">License</p><h3>MIT license stated in the site footer</h3><p>The site surfaces the license claim plainly and routes developers to the source repository for confirmation.</p></article>
-        <article class="info-card"><p class="kicker">Docs</p><h3>Command-forward docs</h3><p>The getting-started docs show the actual loop commands: init, plan, convert, validate, and run.</p></article>
-        <article class="info-card"><p class="kicker">Ecosystem</p><h3>ReScience Lab context</h3><p>Hal is part of the ReScience Lab one-person-company toolchain for agent workflows, pages, research, knowledge, and publishing.</p></article>
+        <article class="info-card"><p class="kicker">Docs</p><h3>Command-forward workflow</h3><p>The docs show the actual loop commands: init, plan, convert, validate, run, and review before merge.</p></article>
+        <article class="info-card"><p class="kicker">Ecosystem</p><h3>ReScience Lab context</h3><p>Hal is part of the ReScience Lab toolchain for agent workflows, pages, research, knowledge, and publishing.</p></article>
       </div>
     </div>
   </section>
 
   <section class="page-section">
     <div class="page-container prose">
-      <h2>Why this replaced the trust-logo bar</h2>
-      <p>The previous homepage used placeholder brand names as a trust bar. It looked like social proof but gave developers nothing to verify. This version uses inspectable links and avoids customer, adoption, star-count, or testimonial claims that are not sourced in the repo.</p>
-      <h2>Want to add real testimonials later?</h2>
-      <p>Add named quotes only when the person, company, permission, and exact wording are available. Until then, earn developer trust with source, docs, license, and transparent product behavior.</p>
+      <h2>Why this is not a testimonial page yet</h2>
+      <p>Placeholder logos and anonymous praise create the shape of trust without giving developers anything to verify. This page avoids customer, adoption, star-count, or testimonial claims that are not sourced in the repo.</p>
+      <h2>What would make testimonials publishable?</h2>
+      <p>Add named quotes only when the person, company, permission, and exact wording are available. Until then, Hal should earn developer trust with source, docs, license, commands, and transparent product behavior.</p>
     </div>
   </section>
   <SiteFooter />

@@ -1,29 +1,49 @@
 ---
-title: "PRD-driven planning - Hal Feature"
-description: "Turn a product requirement into structured stories, acceptance criteria, and implementation state before an agent touches code."
-h1: "PRD-driven planning for agent work"
+title: "PRD-Driven Planning - Hal Feature"
+description: "Turn product intent into stories, acceptance criteria, and reviewable state before an AI coding agent touches the repo."
+h1: "Plan the work before the agent writes code"
 pageType: "feature"
 order: 1
 noindex: false
+summary: "Hal starts with a PRD because vague prompts create vague diffs. Planning gives the agent a bounded target and gives the developer something to review before implementation begins."
+faqs:
+  - question: "Do I need a complete PRD before using Hal?"
+    answer: "No. Hal can help turn product intent into a structured PRD, but the developer should still review scope, constraints, and acceptance criteria before running implementation."
+  - question: "Why not prompt the coding agent directly?"
+    answer: "Direct prompts work for tiny changes, but larger features need explicit stories, constraints, and review points. Hal makes that structure part of the workflow."
+  - question: "What should I check before running the loop?"
+    answer: "Check that each story has a clear outcome, acceptance criteria, known constraints, and a small enough scope to review after the agent runs."
+related:
+  - "fresh-context-every-story"
+  - "project-standards"
+  - "auto-pipeline"
 ---
 
-## Why this exists
+## What breaks without planning
 
-Developers often jump straight to implementation. Hal forces a planning step that captures scope, expected behavior, constraints, and reviewable stories so each implementation loop has a narrow target.
+AI coding agents are strongest when the target is narrow. A broad prompt like “add authentication” can sprawl into UI, database, sessions, middleware, tests, copy, and cleanup in one pass. The result may be useful, but it is harder to inspect.
 
-## Where it fits in the Hal loop
+Hal puts planning before implementation. Product intent becomes stories, acceptance criteria, and runtime state so the agent is working against a defined unit of work instead of a loose request.
 
-Hal starts from product intent instead of one broad prompt. The planning step turns a PRD into explicit stories and acceptance criteria. That gives the agent a bounded target and gives the developer something reviewable before any code is written.
+## How Hal handles it
+
+Run `hal plan` with a product change, then review the generated requirements before the loop starts.
 
 ```bash
-hal plan "describe the product change"
+hal plan "add account settings with one saved preference"
 hal convert
 hal validate
-hal run
 ```
 
-## How to evaluate it
+The important shift is not the command itself. It is the checkpoint. The developer gets to inspect scope before an agent edits files.
 
-- The work should be tied to a specific PRD story or command.
-- The output should leave inspectable files, commits, reports, or state.
-- The developer should still review the changes before merging.
+## What the developer gets
+
+- A PRD or structured requirement in markdown.
+- Story-sized implementation units.
+- Acceptance criteria that define “done.”
+- Runtime state that can be validated before `hal run`.
+
+## How to review the plan
+
+Look for stories that are too broad, acceptance criteria that are not observable, and missing constraints such as authentication, persistence, migration, or UI behavior. If the plan is hard to review, the resulting code will be harder to trust.

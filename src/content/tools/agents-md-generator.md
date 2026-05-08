@@ -29,6 +29,10 @@ Enter your stack, package manager, test command, lint command, architecture rule
 
 AI coding agents can drift into patterns that do not match the codebase. A standards file gives each loop concrete local rules before implementation starts.
 
+## What to include
+
+Favor instructions that change behavior: exact commands, source directories, migration rules, review expectations, and patterns the agent must avoid. Keep generic advice out unless it helps the agent make a concrete decision.
+
 ## Recommended workflow
 
 Commit the generated AGENTS.md, keep it short enough to maintain, and update it when review feedback reveals repeated agent mistakes.

@@ -6,6 +6,7 @@ import { SITE } from "../../data/site";
 
 const faqs = [
   { question: "What do I need before running Hal?", answer: "You need a repository, a clear product requirement or PRD, and access to a supported AI coding engine such as Codex, Claude Code, or Pi." },
+  { question: "What should my first loop be?", answer: "Start with a small, low-risk requirement that has clear acceptance criteria and can be reviewed in one sitting." },
   { question: "Does Hal replace code review?", answer: "No. Hal is designed to leave reviewable state, commits, reports, and archives so a developer can inspect the work before merging." },
   { question: "Where is the source code?", answer: `The Hal source is available on GitHub at ${SITE.repoUrl}.` },
 ];
@@ -15,16 +16,16 @@ const schema = [{
   mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })),
 }];
 ---
-<Layout title="Hal Docs - Getting Started with PRD-Driven Coding" description="Install Hal, initialize a repo, plan a PRD, validate stories, and run an autonomous coding loop." path="/docs" schema={schema}>
+<Layout title="Hal Docs - Run a Reviewable AI Coding Loop" description="Install Hal, initialize a repo, plan a PRD, validate stories, run the loop, and inspect the result before merging." path="/docs" schema={schema}>
   <SiteNav />
   <section class="page-hero">
     <div class="page-container">
       <p class="eyebrow">Docs</p>
-      <h1>Hal docs and getting started guide</h1>
-      <p>Install Hal, initialize the project workflow, turn requirements into stories, and run a small coding loop that leaves a review trail.</p>
+      <h1>Hal docs for reviewable coding loops</h1>
+      <p>Install Hal, initialize the repo workflow, turn requirements into stories, run a bounded agent loop, and inspect the result before merging.</p>
       <div class="btn-row">
-        <a class="btn-primary" href={SITE.repoUrl} target="_blank" rel="noreferrer">Read GitHub README</a>
-        <a class="btn-ghost" href="/getting-started">Quickstart path</a>
+        <a class="btn-primary" href="/getting-started">Run the quickstart</a>
+        <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">Read GitHub README</a>
       </div>
     </div>
   </section>
@@ -32,11 +33,11 @@ const schema = [{
   <section class="page-section">
     <div class="page-container prose">
       <h2>Install</h2>
-      <p>Use the current website install command, then open the GitHub README if you need repository-specific setup details.</p>
+      <p>Use the current website install command, then open the GitHub README if you need repository-specific setup details before running it in a project.</p>
       <pre><code>{SITE.installCommand}</code></pre>
 
       <h2>First loop</h2>
-      <p>A small first run should test the loop rather than hand a giant feature to an agent. Start with a bounded change that has clear acceptance criteria.</p>
+      <p>Your first Hal loop should be boring on purpose. Pick a bounded change with clear acceptance criteria so you can inspect the plan, the changed files, and the final state in one sitting.</p>
       <pre><code>{`hal init
 hal plan "add a small settings page with one saved preference"
 hal convert
@@ -46,20 +47,20 @@ hal run`}</code></pre>
       <h2>What each command does</h2>
       <ul>
         <li><code>hal init</code> creates the local workflow structure for a repo.</li>
-        <li><code>hal plan</code> turns product intent into a PRD or structured requirements.</li>
+        <li><code>hal plan</code> turns product intent into a PRD or structured requirements before the agent touches code.</li>
         <li><code>hal convert</code> turns markdown requirements into runtime state.</li>
-        <li><code>hal validate</code> checks that stories are ready for the loop.</li>
+        <li><code>hal validate</code> checks that stories are specific enough for the loop.</li>
         <li><code>hal run</code> executes implementation iterations with the configured agent engine.</li>
       </ul>
 
       <h2>Review checklist</h2>
-      <p>Before merging agent output, inspect the changed files, commits, reports, tests, and unresolved acceptance criteria. Hal helps structure the loop; it does not remove the developer from final review.</p>
+      <p>Before merging agent output, inspect the changed files, commits, reports, tests, and unresolved acceptance criteria. Hal structures the loop; the developer still owns acceptance.</p>
     </div>
   </section>
 
   <section class="page-section">
     <div class="page-container">
-      <div class="section-head center"><h2>FAQ</h2><p>Short answers for the first install and first loop.</p></div>
+      <div class="section-head center"><h2>FAQ</h2><p>Short answers before you put an agent loop in motion.</p></div>
       <div class="faq-list">{faqs.map((faq) => <article class="faq-item"><h3>{faq.question}</h3><p>{faq.answer}</p></article>)}</div>
     </div>
   </section>
