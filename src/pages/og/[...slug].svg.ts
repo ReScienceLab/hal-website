@@ -1,4 +1,6 @@
 import type { APIRoute, GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import { featureSlug, sortFeaturesByOrder } from "../../data/features";
 import { ROUTES, SITE } from "../../data/site";
 
 type OgProps = { title: string; pageType: string };
@@ -90,8 +92,18 @@ function svg({ title, pageType }: OgProps) {
 </svg>`;
 }
 
-export const getStaticPaths: GetStaticPaths = () =>
-  ROUTES.map((route) => ({ params: { slug: slugForPath(route.path) }, props: { title: route.h1, pageType: route.pageType } }));
+export const getStaticPaths: GetStaticPaths = async () => {
+  const features = sortFeaturesByOrder(await getCollection("features"));
+  const staticRoutes = ROUTES.map((route) => ({
+    params: { slug: slugForPath(route.path) },
+    props: { title: route.h1, pageType: route.pageType },
+  }));
+  const featureRoutes = features.map((feature) => ({
+    params: { slug: slugForPath(`/features/${featureSlug(feature)}`) },
+    props: { title: feature.data.h1, pageType: feature.data.pageType },
+  }));
+  return [...staticRoutes, ...featureRoutes];
+};
 
 export const GET: APIRoute = ({ props }) =>
   new Response(svg(props as OgProps), { headers: { "Content-Type": "image/svg+xml; charset=utf-8" } });

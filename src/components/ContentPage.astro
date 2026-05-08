@@ -1,0 +1,81 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../layouts/Layout.astro";
+import SiteNav from "./SiteNav.astro";
+import SiteFooter from "./SiteFooter.astro";
+import { featureSlug, sortFeaturesByOrder } from "../data/features";
+import { SITE } from "../data/site";
+
+interface Props {
+  entry: {
+    id: string;
+    collection: string;
+    data: {
+      title: string;
+      description: string;
+      h1: string;
+      related?: string[];
+    };
+  };
+  path: string;
+  eyebrow?: string;
+}
+
+const { entry, path, eyebrow } = Astro.props;
+const { Content } = await render(entry);
+
+const collection = entry.collection;
+let related: Props["entry"][] = [];
+
+if (entry.data.related && entry.data.related.length > 0) {
+  const all = await getCollection(collection);
+  related = entry.data.related
+    .map((slug: string) => all.find((e) => e.id.replace(/\.md$/, "") === slug))
+    .filter(Boolean)
+    .slice(0, 3) as Props["entry"][];
+} else if (collection === "features") {
+  const all = sortFeaturesByOrder(await getCollection("features"));
+  related = all.filter((e) => e.id !== entry.id).slice(0, 3) as Props["entry"][];
+}
+---
+
+<Layout title={entry.data.title} description={entry.data.description} path={path}>
+  <SiteNav />
+  <section class="page-hero">
+    <div class="page-container">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1>{entry.data.h1}</h1>
+      <p>{entry.data.description}</p>
+      <div class="btn-row">
+        <a class="btn-primary" href="/docs">Use it in the loop</a>
+        <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">View GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="page-container prose">
+      <Content />
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="page-section">
+      <div class="page-container">
+        <div class="section-head center">
+          <h2>Related features</h2>
+          <p>Keep exploring the pieces of the coding loop.</p>
+        </div>
+        <div class="card-grid">
+          {related.map((item) => (
+            <a class="info-card" href={`/features/${featureSlug(item)}`}>
+              <h3>{item.data.title.replace(" - Hal Feature", "")}</h3>
+              <p>{item.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+  <SiteFooter />
+</Layout>
