@@ -1,10 +1,11 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
+import { featureSlug, sortFeaturesByOrder } from '../data/features';
 import { ROUTES, absoluteUrl } from '../data/site';
 
 export const GET: APIRoute = async () => {
   const today = new Date().toISOString().slice(0, 10);
-  const features = await getCollection('features');
+  const features = sortFeaturesByOrder(await getCollection('features'));
 
   const staticPages = ROUTES.map((route) => ({
     url: route.path,
@@ -13,7 +14,7 @@ export const GET: APIRoute = async () => {
   }));
 
   const featurePages = features.map((feature) => ({
-    url: `/features/${feature.id.replace(/\.md$/, "")}`,
+    url: `/features/${featureSlug(feature)}`,
     priority: '0.6',
     changefreq: 'weekly',
   }));

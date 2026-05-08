@@ -3,9 +3,10 @@ import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import SiteNav from "../../components/SiteNav.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
+import { featureSlug, sortFeaturesByOrder } from "../../data/features";
 import { SITE } from "../../data/site";
 
-const features = await getCollection("features");
+const features = sortFeaturesByOrder(await getCollection("features"));
 ---
 <Layout title="Hal Features - PRD-Driven AI Coding Automation" description="Deep dives into Hal planning, fresh context, engine support, standards, archive, and auto pipeline features." path="/features">
   <SiteNav />
@@ -20,7 +21,7 @@ const features = await getCollection("features");
     <div class="page-container">
       <div class="card-grid">
         {features.map((feature, index) => (
-          <a class="info-card" href={`/features/${feature.id.replace(/\.md$/, "")}`}>
+          <a class="info-card" href={`/features/${featureSlug(feature)}`}>
             <p class="kicker">{String(index + 1).padStart(2, "0")} //</p>
             <h3>{feature.data.title.replace(" - Hal Feature", "")}</h3>
             <p>{feature.data.description}</p>

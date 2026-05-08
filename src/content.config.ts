@@ -15,10 +15,14 @@ const pageSchema = z.object({
   related: z.array(z.string()).default([])
 });
 
+const featureSchema = pageSchema.extend({
+  order: z.number().int().positive()
+});
+
 export const collections = {
   features: defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./src/content/features" }),
-    schema: pageSchema
+    schema: featureSchema
   }),
   docs: defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./src/content/docs" }),

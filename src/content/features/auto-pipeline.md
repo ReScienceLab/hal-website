@@ -3,6 +3,7 @@ title: "Auto pipeline - Hal Feature"
 description: "Run the sequence from planning and validation through implementation, review, reporting, and archive behavior."
 h1: "A deterministic auto pipeline for PRD-driven coding"
 pageType: "feature"
+order: 6
 noindex: false
 ---
 

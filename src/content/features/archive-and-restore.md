@@ -3,6 +3,7 @@ title: "Archive and restore - Hal Feature"
 description: "Preserve progress, reports, and workflow state so features can be paused, reviewed, or resumed later."
 h1: "Archive and restore state between coding loops"
 pageType: "feature"
+order: 5
 noindex: false
 ---
 

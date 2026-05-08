@@ -3,6 +3,7 @@ title: "Project standards - Hal Feature"
 description: "Capture repo-specific patterns and give each iteration the rules it needs to produce consistent, reviewable changes."
 h1: "Project standards injected into each agent loop"
 pageType: "feature"
+order: 4
 noindex: false
 ---
 

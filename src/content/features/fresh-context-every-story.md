@@ -3,6 +3,7 @@ title: "Fresh context every story - Hal Feature"
 description: "Keep long features from becoming one drifting agent session by giving each story its own bounded context window."
 h1: "Fresh context for every implementation story"
 pageType: "feature"
+order: 2
 noindex: false
 ---
 

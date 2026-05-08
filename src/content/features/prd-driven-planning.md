@@ -3,6 +3,7 @@ title: "PRD-driven planning - Hal Feature"
 description: "Turn a product requirement into structured stories, acceptance criteria, and implementation state before an agent touches code."
 h1: "PRD-driven planning for agent work"
 pageType: "feature"
+order: 1
 noindex: false
 ---
 

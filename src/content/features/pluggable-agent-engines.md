@@ -3,6 +3,7 @@ title: "Pluggable agent engines - Hal Feature"
 description: "Use the same PRD-driven loop while changing the underlying coding agent engine when the project needs it."
 h1: "Pluggable engines for Codex, Claude Code, and Pi"
 pageType: "feature"
+order: 3
 noindex: false
 ---
 

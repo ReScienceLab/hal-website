@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import SiteNav from "./SiteNav.astro";
 import SiteFooter from "./SiteFooter.astro";
+import { featureSlug, sortFeaturesByOrder } from "../data/features";
 import { SITE } from "../data/site";
 
 interface Props {
@@ -15,7 +16,6 @@ interface Props {
       h1: string;
       related?: string[];
     };
-    render: () => Promise<{ Content: any }>;
   };
   path: string;
   eyebrow?: string;
@@ -27,18 +27,14 @@ const { Content } = await render(entry);
 const collection = entry.collection;
 let related: Props["entry"][] = [];
 
-function slugFromId(id: string) {
-  return id.replace(/\.md$/, "");
-}
-
 if (entry.data.related && entry.data.related.length > 0) {
   const all = await getCollection(collection);
   related = entry.data.related
-    .map((slug: string) => all.find((e) => slugFromId(e.id) === slug))
+    .map((slug: string) => all.find((e) => e.id.replace(/\.md$/, "") === slug))
     .filter(Boolean)
     .slice(0, 3) as Props["entry"][];
 } else if (collection === "features") {
-  const all = await getCollection("features");
+  const all = sortFeaturesByOrder(await getCollection("features"));
   related = all.filter((e) => e.id !== entry.id).slice(0, 3) as Props["entry"][];
 }
 ---
@@ -72,7 +68,7 @@ if (entry.data.related && entry.data.related.length > 0) {
         </div>
         <div class="card-grid">
           {related.map((item) => (
-            <a class="info-card" href={`/features/${slugFromId(item.id)}`}>
+            <a class="info-card" href={`/features/${featureSlug(item)}`}>
               <h3>{item.data.title.replace(" - Hal Feature", "")}</h3>
               <p>{item.data.description}</p>
             </a>

@@ -1,0 +1,60 @@
+{
+  "command": "hal review --base develop --iterations 1",
+  "baseBranch": "develop",
+  "currentBranch": "feature/migrate-content-collections",
+  "engine": "pi",
+  "requestedIterations": 1,
+  "completedIterations": 1,
+  "stopReason": "max_iterations",
+  "startedAt": "2026-05-08T14:23:21.48258+08:00",
+  "endedAt": "2026-05-08T14:29:23.630179+08:00",
+  "duration": 362148159166,
+  "totals": {
+    "issuesFound": 2,
+    "validIssues": 1,
+    "invalidIssues": 1,
+    "fixesApplied": 1,
+    "filesAffected": [
+      "src/components/ContentPage.astro",
+      "src/pages/og/[...slug].svg.ts"
+    ]
+  },
+  "iterations": [
+    {
+      "iteration": 1,
+      "issuesFound": 2,
+      "validIssues": 1,
+      "invalidIssues": 1,
+      "fixesApplied": 1,
+      "summary": "Validated 2 issues. ISSUE-001 is invalid because the OG SVG eyebrow uses CSS text-transform:uppercase, rendering 'feature' and 'Feature' identically as 'FEATURE'. ISSUE-002 is valid and fixed: the unused render property was removed from ContentPage.astro's Props interface since the component uses the imported render() from astro:content.",
+      "status": "fixed",
+      "duration": 362134517084,
+      "issues": [
+        {
+          "id": "ISSUE-001",
+          "title": "OG image eyebrow casing regression for feature pages",
+          "severity": "medium",
+          "file": "src/pages/og/[...slug].svg.ts",
+          "line": 103,
+          "rationale": "Feature pages previously passed pageType 'Feature' (capitalized) from the ROUTES array, but now pass lowercase 'feature' from the content schema enum. The OG SVG template renders pageType directly in the eyebrow text element, so feature page social previews will display 'feature' instead of 'Feature'.",
+          "suggestedFix": "Normalize the pageType to title case when constructing featureRoutes props, e.g., `pageType: feature.data.pageType === 'feature' ? 'Feature' : feature.data.pageType`.",
+          "valid": false,
+          "fixed": false,
+          "reason": "The SVG .eyebrow class has text-transform: uppercase, so both 'feature' and 'Feature' render identically as 'FEATURE'. The commandMist function also calls .toLowerCase() on pageType. No visual regression exists."
+        },
+        {
+          "id": "ISSUE-002",
+          "title": "Misleading unused render property in ContentPage Props",
+          "severity": "low",
+          "file": "src/components/ContentPage.astro",
+          "line": 20,
+          "rationale": "The Props interface declares `render: () =\u003e Promise\u003c{ Content: any }\u003e` on the entry object, but the component imports and uses `render` from 'astro:content' instead. CollectionEntry objects in Astro 5+ do not have a render method, so this property is unused and creates incorrect type expectations.",
+          "suggestedFix": "Remove the `render` property from the Props interface in ContentPage.astro since it is not accessed.",
+          "valid": true,
+          "fixed": true,
+          "reason": "The Props interface declared render: () =\u003e Promise\u003c{ Content: any }\u003e on entry, but the component imports and uses render from 'astro:content' instead. CollectionEntry in Astro 5+ does not have a .render() method, so this property is unused and misleading."
+        }
+      ]
+    }
+  ]
+}
