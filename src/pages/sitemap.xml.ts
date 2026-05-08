@@ -1,14 +1,24 @@
 import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
 import { ROUTES, absoluteUrl } from '../data/site';
 
 export const GET: APIRoute = async () => {
   const today = new Date().toISOString().slice(0, 10);
+  const features = await getCollection('features');
 
-  const pages = ROUTES.map((route) => ({
+  const staticPages = ROUTES.map((route) => ({
     url: route.path,
     priority: route.path === '/' ? '1.0' : route.path === '/docs' ? '0.8' : '0.6',
     changefreq: 'weekly',
   }));
+
+  const featurePages = features.map((feature) => ({
+    url: `/features/${feature.id.replace(/\.md$/, "")}`,
+    priority: '0.6',
+    changefreq: 'weekly',
+  }));
+
+  const pages = [...staticPages, ...featurePages];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
