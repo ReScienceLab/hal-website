@@ -63,16 +63,19 @@ See `AGENTS.md` for the canonical ReScience Lab content collection pattern.
 
 **Rule:** All durable SEO/GEO pages must use Astro Content Collections (`.md` files in `src/content/` + dynamic `[slug].astro` routes + shared template component).
 
-**Current state:** Hal uses TypeScript data arrays for feature pages. This should migrate to content collections.
+**Current state:** Feature detail pages and free tool detail pages now use Astro Content Collections. Features live in `src/content/features/*.md` and are served by `src/pages/features/[slug].astro`; tools live in `src/content/tools/*.md` and are served by `src/pages/tools/[slug].astro`. TypeScript data files remain for shared site constants, navigation, ordering helpers, and UI wiring.
 
-**Migration target:**
+**Remaining collection gaps:**
+- `src/content/docs/*.md` — documentation pages still need durable entries
+- `src/content/faq/*.md` — FAQ pages still need durable entries
+- `src/content/glossary/*.md` — glossary pages still need durable entries
+
+**Implemented collection routes:**
 - `src/content/features/*.md` — feature detail pages
-- `src/content/docs/*.md` — documentation pages
-- `src/content/faq/*.md` — FAQ pages
-- `src/content/glossary/*.md` — glossary pages
 - `src/content/tools/*.md` — free tool metadata, FAQs, and supporting content
-- `src/components/ContentPage.astro` — shared template
-- `src/pages/features/[slug].astro` — dynamic route (~10 lines)
+- `src/components/ContentPage.astro` — shared content template
+- `src/pages/features/[slug].astro` — feature dynamic route
+- `src/pages/tools/[slug].astro` — tool dynamic route
 
 Adding a new page = creating one `.md` file. No `.astro` duplication.
 

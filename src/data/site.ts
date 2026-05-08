@@ -6,7 +6,7 @@ export const SITE = {
   repoUrl: "https://github.com/ReScienceLab/hal",
   rescienceUrl: "https://rescience.com/products/hal",
   installCommand: "curl -fsSL https://hal.run/install.sh | bash",
-  version: "v0.4.0",
+  version: "v0.0.8",
 } as const;
 
 export const ROUTES = [
