@@ -1,11 +1,13 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import { featureSlug, sortFeaturesByOrder } from '../data/features';
+import { toolSlug, sortToolsByOrder } from '../data/tools';
 import { ROUTES, absoluteUrl } from '../data/site';
 
 export const GET: APIRoute = async () => {
   const today = new Date().toISOString().slice(0, 10);
   const features = sortFeaturesByOrder(await getCollection('features'));
+  const tools = sortToolsByOrder(await getCollection('tools'));
 
   const staticPages = ROUTES.map((route) => ({
     url: route.path,
@@ -19,7 +21,13 @@ export const GET: APIRoute = async () => {
     changefreq: 'weekly',
   }));
 
-  const pages = [...staticPages, ...featurePages];
+  const toolPages = tools.map((tool) => ({
+    url: `/tools/${toolSlug(tool)}`,
+    priority: '0.7',
+    changefreq: 'weekly',
+  }));
+
+  const pages = [...staticPages, ...featurePages, ...toolPages];
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

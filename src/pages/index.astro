@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SITE } from '../data/site';
 ---
 
 <Layout title="Hal — Autonomous coding loop for developers">
@@ -506,8 +507,9 @@ import Layout from '../layouts/Layout.astro';
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#workflow">Workflow</a>
+        <a href="/tools">Tools</a>
         <a href="/docs">Docs</a>
-        <a href="https://github.com/j-yw/hal" target="_blank">GitHub</a>
+        <a href={SITE.repoUrl} target="_blank" rel="noreferrer">GitHub</a>
       </div>
       <a href="#install" class="nav-cta">Install</a>
     </div>
@@ -519,8 +521,8 @@ import Layout from '../layouts/Layout.astro';
         <span class="dot"></span>
         v0.4.0
       </div>
-      <h1>Write the PRD.<br>Hal ships it.</h1>
-      <p class="subtitle">An autonomous coding loop that turns your product requirements into commits. Describe what you want. Hal plans the stories, writes the code, and opens the pull request.</p>
+      <h1>Write the PRD.<br>Run the loop.</h1>
+      <p class="subtitle">An autonomous coding loop that turns product requirements into reviewable implementation state. Describe what you want, plan the stories, run the work, and inspect the result before merging.</p>
       <div class="hero-actions">
         <a href="#install" class="btn-primary">Get Hal</a>
         <button class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL https://hal.run/install.sh | bash');this.querySelector('.copy').textContent='Copied!'">
@@ -528,7 +530,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="copy">Copy</span>
         </button>
       </div>
-      <p class="hero-meta">Or read the <a href="https://github.com/j-yw/hal#readme">documentation</a></p>
+      <p class="hero-meta">Or read the <a href={`${SITE.repoUrl}#readme`}>documentation</a></p>
     </div>
   </section>
 
@@ -536,8 +538,9 @@ import Layout from '../layouts/Layout.astro';
     <div class="container">
       <p class="trust-label">Built for developers who ship</p>
       <div class="trust-logos">
-        <a href="https://github.com/j-yw/hal" target="_blank" rel="noopener noreferrer" aria-label="Hal on GitHub">
-          <img src="https://img.shields.io/github/stars/j-yw/hal?style=social" alt="GitHub stars" loading="lazy" />
+        <a class="install-cmd" href={SITE.repoUrl} target="_blank" rel="noopener noreferrer" aria-label="Hal on GitHub">
+          <span>Inspect source on GitHub</span>
+          <span class="copy">Open</span>
         </a>
       </div>
     </div>
@@ -651,7 +654,7 @@ import Layout from '../layouts/Layout.astro';
               <span class="ok">  ✓ Implemented and committed</span><br/>
               <span class="dim">→ US-002: Add theme toggle UI component</span><br/>
               <span class="ok">  ✓ Implemented and committed</span><br/>
-              <span class="ok">All 5 stories shipped. 5 commits. 0 meetings.</span>
+              <span class="ok">All 5 stories complete. 5 commits ready for review.</span>
             </div>
           </div>
         </div>
@@ -684,7 +687,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="step">
           <div class="step-num">STEP 04</div>
           <h3>Ship</h3>
-          <p><code>hal run</code> picks the next story, implements it, commits, and repeats until everything ships.</p>
+          <p><code>hal run</code> picks the next story, runs implementation, commits reviewable state, and repeats through the planned work.</p>
         </div>
       </div>
     </div>
@@ -707,14 +710,14 @@ import Layout from '../layouts/Layout.astro';
   <section class="cta" id="install">
     <div class="container">
       <h2>Hand off the execution.<br>Keep the architecture.</h2>
-      <p>Install Hal in one command and start shipping stories autonomously.</p>
+      <p>Install Hal in one command and start running reviewable stories autonomously.</p>
       <div class="hero-actions">
         <button class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL https://hal.run/install.sh | bash');this.querySelector('.copy').textContent='Copied!'">
           <span>curl -fsSL https://hal.run/install.sh | bash</span>
           <span class="copy">Copy</span>
         </button>
       </div>
-      <p class="hero-meta">Or read the <a href="https://github.com/j-yw/hal#readme">documentation</a></p>
+      <p class="hero-meta">Or read the <a href={`${SITE.repoUrl}#readme`}>documentation</a></p>
     </div>
   </section>
 
@@ -722,8 +725,8 @@ import Layout from '../layouts/Layout.astro';
     <div class="container footer-inner">
       <div class="left">© 2026 Hal. MIT License.</div>
       <div class="right">
-        <a href="https://github.com/j-yw/hal" target="_blank">GitHub</a>
-        <a href="https://rescience.com" target="_blank">ReScience</a>
+        <a href={SITE.repoUrl} target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://rescience.com" target="_blank" rel="noreferrer">ReScience</a>
       </div>
     </div>
   </footer>
