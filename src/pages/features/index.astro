@@ -8,13 +8,13 @@ import { SITE } from "../../data/site";
 
 const features = sortFeaturesByOrder(await getCollection("features"));
 ---
-<Layout title="Hal Features - PRD-Driven AI Coding Automation" description="Deep dives into Hal planning, fresh context, engine support, standards, archive, and auto pipeline features." path="/features">
+<Layout title="Hal Features - Reviewable AI Coding Loops" description="Explore Hal features for PRD planning, fresh story context, pluggable engines, project standards, archived state, and deterministic loop execution." path="/features">
   <SiteNav />
   <section class="page-hero">
     <div class="page-container">
       <p class="eyebrow">Features</p>
-      <h1>Hal features for autonomous coding loops</h1>
-      <p>Deep dives into the mechanics behind PRD-driven planning, fresh context, pluggable engines, standards, archive state, and auto pipeline behavior.</p>
+      <h1>Features for reviewable AI coding loops</h1>
+      <p>Hal gives coding agents a workflow: plan the requirement, bound the context, inject local standards, run implementation, and preserve the trail for human review.</p>
     </div>
   </section>
   <section class="page-section">
@@ -29,8 +29,8 @@ const features = sortFeaturesByOrder(await getCollection("features"));
         ))}
       </div>
       <div class="btn-row">
-        <a class="btn-primary" href="/docs">Read docs</a>
-        <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">View source</a>
+        <a class="btn-primary" href="/docs">Run the first loop</a>
+        <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">Inspect source</a>
       </div>
     </div>
   </section>

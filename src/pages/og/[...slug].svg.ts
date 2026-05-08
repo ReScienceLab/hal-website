@@ -89,7 +89,7 @@ function svg({ title, pageType }: OgProps) {
   <text x="76" y="104" class="brand">${escapeXml(SITE.name)}</text>
   <text x="76" y="164" class="eyebrow">${escapeXml(pageType)}</text>
   ${text}
-  <text x="76" y="548" class="caption">PRD-driven coding loops with inspectable state.</text>
+  <text x="76" y="548" class="caption">PRD-native coding loops with inspectable state.</text>
 </svg>`;
 }
 

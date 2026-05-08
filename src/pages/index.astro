@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { SITE } from '../data/site';
 ---
 
-<Layout title="Hal — Autonomous coding loop for developers">
+<Layout title="Hal — PRD-Native Coding Loops for AI Agents" description={SITE.description}>
   <style>
     .container {
       max-width: 1200px;
@@ -519,24 +519,24 @@ import { SITE } from '../data/site';
     <div class="container">
       <div class="hero-badge">
         <span class="dot"></span>
-        v0.4.0
+        {SITE.version}
       </div>
-      <h1>Write the PRD.<br>Run the loop.</h1>
-      <p class="subtitle">An autonomous coding loop that turns product requirements into reviewable implementation state. Describe what you want, plan the stories, run the work, and inspect the result before merging.</p>
+      <h1>PRD-native coding loops<br>for AI agents.</h1>
+      <p class="subtitle">Hal turns product requirements into bounded stories, runs them through Codex, Claude Code, or Pi, and leaves reviewable commits, reports, and state before you merge.</p>
       <div class="hero-actions">
-        <a href="#install" class="btn-primary">Get Hal</a>
+        <a href="#install" class="btn-primary">Install Hal</a>
         <button class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL https://hal.run/install.sh | bash');this.querySelector('.copy').textContent='Copied!'">
           <span>curl -fsSL https://hal.run/install.sh | bash</span>
           <span class="copy">Copy</span>
         </button>
       </div>
-      <p class="hero-meta">Or read the <a href={`${SITE.repoUrl}#readme`}>documentation</a></p>
+      <p class="hero-meta">Or inspect the <a href={`${SITE.repoUrl}#readme`}>README on GitHub</a></p>
     </div>
   </section>
 
   <section class="trust">
     <div class="container">
-      <p class="trust-label">Built for developers who ship</p>
+      <p class="trust-label">Proof you can inspect before you run it</p>
       <div class="trust-logos">
         <a class="install-cmd" href={SITE.repoUrl} target="_blank" rel="noopener noreferrer" aria-label="Hal on GitHub">
           <span>Inspect source on GitHub</span>
@@ -570,7 +570,7 @@ import { SITE } from '../data/site';
             <span class="ok">  ✓ Committed: feat: US-002 — JWT middleware</span><br/>
             <span class="dim">→ US-003: Wire up logout</span><br/>
             <span class="ok">  ✓ Committed: feat: US-003 — logout flow</span><br/>
-            <span class="ok">All stories complete. 3 commits shipped.</span>
+            <span class="ok">All stories complete. 3 commits ready for review.</span>
           </div>
         </div>
       </div>
@@ -580,39 +580,39 @@ import { SITE } from '../data/site';
   <section class="features" id="features">
     <div class="container">
       <div class="section-header">
-        <h2>Ship without context switching</h2>
-        <p>Every feature is built to keep the loop running so you can focus on the product, not the process.</p>
+        <h2>Give agents a workflow, not a wish.</h2>
+        <p>Hal wraps AI coding agents in a loop that plans scope, bounds context, preserves state, and keeps the human in review.</p>
       </div>
       <div class="feature-grid">
         <div class="feature-card">
           <div class="icon">01 //</div>
-          <h3>PRD-driven planning</h3>
-          <p>Describe what you want in plain English. Hal generates structured user stories with clear acceptance criteria.</p>
+          <h3>Plan before code</h3>
+          <p>Turn product intent into stories and acceptance criteria before an agent touches the repo.</p>
         </div>
         <div class="feature-card">
           <div class="icon">02 //</div>
-          <h3>Fresh context every story</h3>
-          <p>Each iteration gets a clean context window. No memory pollution, no drifting prompts, no compounding errors.</p>
+          <h3>Bound every story</h3>
+          <p>Give each implementation story its own context so long features do not become one drifting chat.</p>
         </div>
         <div class="feature-card">
           <div class="icon">03 //</div>
-          <h3>Use any agent</h3>
-          <p>Pluggable engines: Claude Code, OpenAI Codex, Pi. Switch agents without changing your workflow.</p>
+          <h3>Bring your agent</h3>
+          <p>Use Codex, Claude Code, or Pi inside the same PRD-driven workflow and review process.</p>
         </div>
         <div class="feature-card">
           <div class="icon">04 //</div>
-          <h3>Project standards</h3>
-          <p>Codify your patterns into standards that get injected into every iteration. Consistency at scale.</p>
+          <h3>Inject local standards</h3>
+          <p>Carry repo commands, conventions, and review rules into each implementation loop.</p>
         </div>
         <div class="feature-card">
           <div class="icon">05 //</div>
-          <h3>Archive and restore</h3>
-          <p>Switch between features without losing state. Branch, archive, restore — like git for your agent loop.</p>
+          <h3>Preserve the trail</h3>
+          <p>Keep progress, reports, workflow files, and archives available for inspection or later continuation.</p>
         </div>
         <div class="feature-card">
           <div class="icon">06 //</div>
-          <h3>Auto pipeline</h3>
-          <p>One command runs the entire sequence from plan through archive. Deterministic, repeatable, hands-off.</p>
+          <h3>Run a named pipeline</h3>
+          <p>Move through plan, convert, validate, run, report, and archive behavior as explicit steps.</p>
         </div>
       </div>
     </div>
@@ -621,8 +621,8 @@ import { SITE } from '../data/site';
   <section class="use-cases" id="use-cases">
     <div class="container">
       <div class="section-header">
-        <h2>What could you do with Hal?</h2>
-        <p>From greenfield features to legacy refactors — hand off the execution, keep the architecture.</p>
+        <h2>Where Hal fits</h2>
+        <p>Use Hal when the task is clear enough to plan, risky enough to review, and repetitive enough to deserve a loop.</p>
       </div>
       <div class="use-case-tabs">
         <span class="use-case-tab active">Greenfield feature</span>
@@ -665,8 +665,8 @@ import { SITE } from '../data/site';
   <section class="workflow" id="workflow">
     <div class="container">
       <div class="section-header">
-        <h2>The loop</h2>
-        <p>One deterministic pipeline from idea to shipped code.</p>
+        <h2>Plan. Validate. Run. Review.</h2>
+        <p>One explicit pipeline from product intent to reviewable changes.</p>
       </div>
       <div class="steps">
         <div class="step">
@@ -686,7 +686,7 @@ import { SITE } from '../data/site';
         </div>
         <div class="step">
           <div class="step-num">STEP 04</div>
-          <h3>Ship</h3>
+          <h3>Run</h3>
           <p><code>hal run</code> picks the next story, runs implementation, commits reviewable state, and repeats through the planned work.</p>
         </div>
       </div>
@@ -696,8 +696,8 @@ import { SITE } from '../data/site';
   <section class="engines">
     <div class="container">
       <div class="section-header">
-        <h2>Bring your own agent</h2>
-        <p>Hal is engine-agnostic. Plug in the agent you already trust.</p>
+        <h2>Bring the agent you already use</h2>
+        <p>Hal supplies the loop. Codex, Claude Code, or Pi supplies the implementation engine.</p>
       </div>
       <div class="engine-list">
         <div class="engine-item"><span class="bullet"></span>Claude Code</div>
@@ -709,15 +709,15 @@ import { SITE } from '../data/site';
 
   <section class="cta" id="install">
     <div class="container">
-      <h2>Hand off the execution.<br>Keep the architecture.</h2>
-      <p>Install Hal in one command and start running reviewable stories autonomously.</p>
+      <h2>Run a small loop.<br>Review every change.</h2>
+      <p>Install Hal, start with a bounded requirement, and inspect the resulting commits before merging.</p>
       <div class="hero-actions">
         <button class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL https://hal.run/install.sh | bash');this.querySelector('.copy').textContent='Copied!'">
           <span>curl -fsSL https://hal.run/install.sh | bash</span>
           <span class="copy">Copy</span>
         </button>
       </div>
-      <p class="hero-meta">Or read the <a href={`${SITE.repoUrl}#readme`}>documentation</a></p>
+      <p class="hero-meta">Or inspect the <a href={`${SITE.repoUrl}#readme`}>README on GitHub</a></p>
     </div>
   </section>
 

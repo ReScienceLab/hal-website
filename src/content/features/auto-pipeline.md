@@ -1,19 +1,33 @@
 ---
-title: "Auto pipeline - Hal Feature"
-description: "Run the sequence from planning and validation through implementation, review, reporting, and archive behavior."
-h1: "A deterministic auto pipeline for PRD-driven coding"
+title: "Auto Pipeline - Hal Feature"
+description: "Move through planning, conversion, validation, implementation, reporting, and archive behavior as one explicit coding loop."
+h1: "A deterministic pipeline for AI coding work"
 pageType: "feature"
 order: 6
 noindex: false
+summary: "Hal turns agent work into a named sequence. Instead of one open-ended chat, the loop moves through explicit phases that are easier to inspect and repeat."
+faqs:
+  - question: "What does the auto pipeline automate?"
+    answer: "It is designed to move through the Hal workflow phases such as planning, conversion, validation, implementation, reporting, and archive behavior. Check the current source docs for exact command behavior."
+  - question: "Is the pipeline fully hands-off?"
+    answer: "Hal can run autonomous implementation loops, but developers should still review the resulting state before merging."
+  - question: "Why is determinism important?"
+    answer: "Named steps make the work easier to repeat, debug, and audit than a long chat session with unclear boundaries."
+related:
+  - "prd-driven-planning"
+  - "archive-and-restore"
+  - "project-standards"
 ---
 
-## Why this exists
+## What breaks in open-ended chat
 
-The auto pipeline is for repeatable agent runs where every phase should be explicit. It keeps the work observable by moving through named steps rather than an open-ended chat session.
+Chat is flexible, but it is a weak production workflow. The boundaries are soft, the sequence is easy to skip, and the review trail can disappear inside the conversation.
 
-## Where it fits in the Hal loop
+Hal makes the loop explicit.
 
-Run the sequence from planning and validation through implementation, review, reporting, and archive behavior. Each phase is explicit and leaves inspectable state.
+## How Hal handles it
+
+A Hal run moves through named phases: plan the work, convert requirements, validate stories, run implementation, and preserve reviewable state.
 
 ```bash
 hal plan "describe the product change"
@@ -22,8 +36,15 @@ hal validate
 hal run
 ```
 
-## How to evaluate it
+Each step has a job. Each step gives the developer a place to inspect the work.
 
-- The work should be tied to a specific PRD story or command.
-- The output should leave inspectable files, commits, reports, or state.
-- The developer should still review the changes before merging.
+## What the developer gets
+
+- A repeatable sequence for agent-driven implementation.
+- Clear checkpoints before and after code changes.
+- Less reliance on memory or manual prompt choreography.
+- A workflow that can be documented, reviewed, and improved.
+
+## How to review the pipeline
+
+Start with a small feature. Confirm the plan is specific, validation passes, the agent changes only relevant files, and the resulting state is understandable before expanding to larger work.

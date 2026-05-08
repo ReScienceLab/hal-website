@@ -80,7 +80,7 @@ const schema = [
       <div class="page-container">
         <div class="section-head center">
           <h2>FAQ</h2>
-          <p>Short answers before you use this tool in an agent workflow.</p>
+          <p>Short answers before you hand the output to an agent workflow.</p>
         </div>
         <div class="faq-list">
           {faqs.map((faq) => <article class="faq-item"><h3>{faq.question}</h3><p>{faq.answer}</p></article>)}
@@ -94,7 +94,7 @@ const schema = [
       <div class="page-container">
         <div class="section-head center">
           <h2>Related free tools</h2>
-          <p>Prepare better PRDs, stories, and standards before running a coding loop.</p>
+          <p>Prepare better PRDs, stories, and standards before an agent touches the repo.</p>
         </div>
         <div class="card-grid">
           {related.map((tool) => (
@@ -114,7 +114,7 @@ const schema = [
       <div class="info-card">
         <p class="kicker">Next step</p>
         <h2>Use the output in a Hal loop</h2>
-        <p>Hal is a terminal-first CLI for PRD-driven coding loops. Use the generated markdown as planning input, keep the work bounded, and review agent output before merging.</p>
+        <p>Hal is a terminal-first CLI for PRD-native coding loops. Use the generated markdown as planning input, keep the work bounded, and review agent output before merging.</p>
         <div class="btn-row">
           <a class="btn-primary" href="/docs">Read Hal docs</a>
           <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">View GitHub</a>

@@ -29,6 +29,10 @@ Enter a feature idea, user role, application type, expected success behavior, an
 
 Agent loops are easier to review when each story has a clear definition of done. Acceptance criteria keep the work grounded in observable behavior rather than vague intent.
 
+## What good criteria prevent
+
+They reduce arguments with the agent after the fact. Instead of asking whether a change “looks right,” the reviewer can check whether the expected behavior, edge cases, and failure states were handled.
+
 ## Recommended workflow
 
-Generate criteria first, then use them inside a PRD or task-splitting workflow before running implementation.
+Generate criteria first, add them to a PRD or task-splitting workflow, then run implementation only after the story is small enough to review.

@@ -1,29 +1,49 @@
 ---
-title: "Project standards - Hal Feature"
-description: "Capture repo-specific patterns and give each iteration the rules it needs to produce consistent, reviewable changes."
-h1: "Project standards injected into each agent loop"
+title: "Project Standards - Hal Feature"
+description: "Give each AI coding iteration the repo-specific commands, conventions, and review rules it needs to stay consistent."
+h1: "Inject project standards into each agent loop"
 pageType: "feature"
 order: 4
 noindex: false
+summary: "Agents default to generic patterns unless the repo tells them otherwise. Hal helps carry project standards into each story so implementation starts with local rules, not guesses."
+faqs:
+  - question: "What belongs in project standards?"
+    answer: "Include build and test commands, architecture rules, code style, forbidden patterns, review expectations, and repo-specific conventions the agent should follow."
+  - question: "Should standards be long?"
+    answer: "Usually no. Short, concrete instructions are easier to maintain and easier for agents to follow. Add detail when repeated review feedback shows a missing rule."
+  - question: "Can standards replace code review?"
+    answer: "No. Standards reduce avoidable mistakes, but a developer should still inspect the generated changes before merging."
+related:
+  - "fresh-context-every-story"
+  - "pluggable-agent-engines"
+  - "prd-driven-planning"
 ---
 
-## Why this exists
+## What breaks without local rules
 
-Agents invent a new style for every story unless they have local conventions. Standards help the agent follow repo-specific patterns so output is consistent and reviewable.
+Agents can write plausible code that does not match the repo. They may choose the wrong package manager, miss the test command, invent folder patterns, or use a style the team already rejected.
 
-## Where it fits in the Hal loop
+Those mistakes are not always model failures. Often, the agent simply did not receive the local rules.
 
-Hal includes commands for discovering, indexing, and injecting standards into implementation work. Each story receives the relevant standards as part of its context window.
+## How Hal handles it
+
+Hal includes project standards as part of the loop context so each story starts with the commands, conventions, and constraints that matter for this repo.
 
 ```bash
-hal plan "describe the product change"
-hal convert
+hal init
 hal validate
 hal run
 ```
 
-## How to evaluate it
+The point is to make the expected way of working explicit before implementation begins.
 
-- The work should be tied to a specific PRD story or command.
-- The output should leave inspectable files, commits, reports, or state.
-- The developer should still review the changes before merging.
+## What the developer gets
+
+- Repeatable instructions for future loops.
+- Fewer style and workflow surprises.
+- A clearer review basis when the agent deviates.
+- Standards that can evolve as the repo changes.
+
+## How to review standards
+
+Ask whether each rule changes agent behavior. “Use our existing patterns” is weak. “Use Bun commands, keep Astro content pages in `src/content`, and run `bun run build` before finishing” is stronger.
