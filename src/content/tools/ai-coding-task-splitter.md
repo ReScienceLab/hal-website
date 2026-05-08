@@ -27,7 +27,11 @@ Paste a feature request or technical change. Add stack details and an estimate o
 
 ## Why this helps Hal loops
 
-Hal is built around bounded implementation loops. Splitting a large feature into reviewable stories keeps the agent focused and gives the developer smaller review points.
+Hal is built around bounded implementation loops. Splitting a large feature into reviewable stories keeps the agent focused and gives the developer smaller checkpoints.
+
+## What the risk score is for
+
+The score is a planning signal, not a permission slip. Use it to decide whether to shrink scope, add acceptance criteria, require more manual review, or avoid autonomous execution for sensitive work.
 
 ## Recommended workflow
 

@@ -4,13 +4,13 @@ import SiteNav from "../components/SiteNav.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import { SITE } from "../data/site";
 ---
-<Layout title="Getting Started with Hal - Install and Run Your First Loop" description="A quickstart path for installing Hal and running the first PRD-driven coding loop." path="/getting-started">
+<Layout title="Getting Started with Hal - Run Your First Reviewable Loop" description="A safe quickstart for installing Hal, planning a small requirement, validating stories, running the loop, and reviewing the output." path="/getting-started">
   <SiteNav />
   <section class="page-hero">
     <div class="page-container">
       <p class="eyebrow">Quickstart</p>
-      <h1>Getting started with Hal</h1>
-      <p>Use a small, reviewable feature to verify the loop: initialize, plan, convert, validate, run, and inspect the result.</p>
+      <h1>Run your first Hal loop</h1>
+      <p>Start with a small requirement on purpose. Initialize the repo, plan the work, validate the stories, run the loop, and inspect every change before merging.</p>
     </div>
   </section>
   <section class="page-section">
@@ -19,16 +19,16 @@ import { SITE } from "../data/site";
       <pre><code>{SITE.installCommand}</code></pre>
       <h2>2. Initialize a repository</h2>
       <pre><code>hal init</code></pre>
-      <p>This creates the local Hal workflow files used by the loop.</p>
-      <h2>3. Plan a small requirement</h2>
+      <p>This creates the local Hal workflow files used to plan, validate, run, and preserve loop state.</p>
+      <h2>3. Plan a small requirement before code</h2>
       <pre><code>hal plan "add a dark mode toggle with system preference detection"</code></pre>
-      <p>Keep the first task narrow enough to review in one sitting.</p>
-      <h2>4. Convert, validate, and run</h2>
+      <p>Keep the first task narrow enough to review in one sitting. If the plan feels too broad, split it before running implementation.</p>
+      <h2>4. Convert, validate, and run the loop</h2>
       <pre><code>{`hal convert
 hal validate
 hal run`}</code></pre>
       <h2>5. Review before merging</h2>
-      <p>Inspect changed files, commits, test output, reports, and any remaining stories. Hal structures autonomous work, but the human still owns acceptance.</p>
+      <p>Inspect changed files, commits, test output, reports, and any remaining stories. Hal can run the coding loop, but the human still owns acceptance.</p>
     </div>
   </section>
   <SiteFooter />

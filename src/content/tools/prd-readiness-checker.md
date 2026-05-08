@@ -1,6 +1,6 @@
 ---
 title: "Free PRD Readiness Checker for AI Coding"
-description: "Check whether a product requirement is specific enough for an AI coding loop before an agent touches code."
+description: "Check whether a product requirement is specific enough for an AI coding loop before an agent touches the repo."
 h1: "PRD readiness checker for AI coding"
 pageType: "tool"
 order: 1
@@ -28,6 +28,10 @@ Paste a product requirement, feature brief, or early PRD draft. The tool looks f
 ## What the score means
 
 A high score does not guarantee code quality. It means the requirement is better structured for a reviewable implementation loop. Hal still expects developers to inspect generated code, commits, reports, and remaining acceptance criteria before merging.
+
+## When to use it
+
+Use the checker before `hal plan`, before assigning a task to a coding agent, or before splitting a large feature into stories. If the score is low, tighten the requirement before the agent edits files.
 
 ## Next step
 

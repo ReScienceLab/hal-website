@@ -27,8 +27,12 @@ Describe the feature, the user, the desired behavior, constraints, and the techn
 
 ## Why this helps AI coding workflows
 
-Broad prompts create broad changes. A PRD breaks intent into reviewable sections so a developer can inspect scope before implementation and evaluate output after each story.
+Broad prompts create broad changes. A PRD gives the agent a narrower target and gives the developer a document to review before implementation begins.
+
+## What to check before running Hal
+
+Confirm the PRD names the user, defines in-scope and out-of-scope behavior, includes acceptance criteria, and calls out risky areas such as authentication, payments, migrations, permissions, or data loss.
 
 ## Recommended workflow
 
-Generate the PRD, run it through the PRD Readiness Checker, then use the final markdown as the source for a small Hal loop.
+Generate the PRD, run it through the PRD Readiness Checker, split risky work into smaller stories, then use the final markdown as the source for a small Hal loop.

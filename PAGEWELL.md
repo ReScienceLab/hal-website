@@ -12,8 +12,8 @@ PAGEWELL.md is the source of truth for Hal website page generation and SEO/GEO m
 - Name: Hal
 - URL: https://hal.rocks
 - Source repository: https://github.com/ReScienceLab/hal
-- Category: Terminal-first CLI for autonomous PRD-driven coding loops
-- One-sentence description: Hal is a CLI for running PRD-driven development loops with AI coding agents such as Codex, Claude Code, and Pi.
+- Category: Terminal-first CLI for PRD-native, reviewable AI coding loops
+- One-sentence description: Hal is a CLI for running PRD-native development loops with AI coding agents such as Codex, Claude Code, and Pi.
 - Primary audience:
   - solo developers and technical founders
   - developers using AI coding agents
