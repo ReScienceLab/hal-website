@@ -56,6 +56,24 @@ Do not claim:
   - Preview: `bun run preview`
   - Design lint: `bun run lint:design`
 
+## Content Architecture Standard
+
+See `AGENTS.md` for the canonical ReScience Lab content collection pattern.
+
+**Rule:** All durable SEO/GEO pages must use Astro Content Collections (`.md` files in `src/content/` + dynamic `[slug].astro` routes + shared template component).
+
+**Current state:** Hal uses TypeScript data arrays for feature pages. This should migrate to content collections.
+
+**Migration target:**
+- `src/content/features/*.md` — feature detail pages
+- `src/content/docs/*.md` — documentation pages
+- `src/content/faq/*.md` — FAQ pages
+- `src/content/glossary/*.md` — glossary pages
+- `src/components/ContentPage.astro` — shared template
+- `src/pages/features/[slug].astro` — dynamic route (~10 lines)
+
+Adding a new page = creating one `.md` file. No `.astro` duplication.
+
 ## Route taxonomy
 
 | Intent | Route pattern | Notes |
