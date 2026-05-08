@@ -49,6 +49,7 @@ Do not claim:
 - Design source: `DESIGN.md`
 - Product/site data: `src/data/site.ts`
 - Discovery files: `src/pages/robots.txt.ts`, `src/pages/sitemap.xml.ts`, and `src/pages/llms.txt.ts`
+- Free tools: `src/content/tools/*.md` for durable tool content, `src/pages/tools/[slug].astro` for dynamic routes, and `src/components/ToolRunner.astro` for browser-side interactive logic
 - OG images: generated SVG routes under `src/pages/og/[...slug].svg.ts`
 - Commands:
   - Dev: `bun run dev`
@@ -69,6 +70,7 @@ See `AGENTS.md` for the canonical ReScience Lab content collection pattern.
 - `src/content/docs/*.md` — documentation pages
 - `src/content/faq/*.md` — FAQ pages
 - `src/content/glossary/*.md` — glossary pages
+- `src/content/tools/*.md` — free tool metadata, FAQs, and supporting content
 - `src/components/ContentPage.astro` — shared template
 - `src/pages/features/[slug].astro` — dynamic route (~10 lines)
 
@@ -82,6 +84,8 @@ Adding a new page = creating one `.md` file. No `.astro` duplication.
 | Docs | `/docs`, `/getting-started` | Install and first-loop documentation. |
 | Feature hub | `/features` | Lists feature detail pages. |
 | Feature detail | `/features/<slug>` | One feature mechanic per page. |
+| Tools hub | `/tools` | Free AI coding tools for PRDs, agent standards, acceptance criteria, and task splitting. |
+| Tool detail | `/tools/<slug>` | Interactive file-based tool shell with durable content from `src/content/tools`. |
 | Pricing | `/pricing` | Transparent open-source CLI status. |
 | Trust/proof | `/testimonials` | Real inspectable signals; no fake testimonials. |
 | Discovery | `/robots.txt`, `/sitemap.xml`, `/llms.txt` | Generated endpoint files. |

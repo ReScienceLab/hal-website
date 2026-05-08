@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import { sortToolsByOrder, toolSlug } from "../../data/tools";
+import { SITE } from "../../data/site";
+
+const tools = sortToolsByOrder(await getCollection("tools"));
+const schema = {
+  "@type": "CollectionPage",
+  "@id": `${SITE.domain}/tools#collection`,
+  name: "Free AI coding tools",
+  description: "Free developer tools for preparing PRDs, acceptance criteria, project standards, and reviewable AI coding tasks.",
+  hasPart: tools.map((tool) => ({
+    "@type": "WebApplication",
+    name: tool.data.h1,
+    url: `${SITE.domain}/tools/${toolSlug(tool)}`,
+    applicationCategory: "DeveloperApplication",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+  })),
+};
+---
+
+<Layout title="Free AI Coding Tools for PRDs, Agents, and Reviewable Tasks" description="Use free tools to check PRD readiness, generate AI coding PRDs, write acceptance criteria, create AGENTS.md files, and split risky coding tasks." path="/tools" schema={schema}>
+  <SiteNav />
+  <section class="page-hero">
+    <div class="page-container">
+      <p class="eyebrow">Free tools</p>
+      <h1>Free AI coding tools for PRDs and agent loops</h1>
+      <p>Prepare better requirements before handing work to an AI coding agent. Each tool gives first value without signup and routes the output toward a reviewable Hal workflow.</p>
+      <div class="btn-row">
+        <a class="btn-primary" href="/tools/prd-readiness-checker">Start with the PRD checker</a>
+        <a class="btn-ghost" href="/docs">Read Hal docs</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="card-grid">
+        {tools.map((tool) => (
+          <a class="info-card" href={`/tools/${toolSlug(tool)}`}>
+            <p class="kicker">{tool.data.category}</p>
+            <h3>{tool.data.h1}</h3>
+            <p>{tool.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="page-container prose">
+      <h2>Why these tools exist</h2>
+      <p>AI coding works better when the task is specific, bounded, and easy to review. These tools help developers turn vague intent into PRDs, acceptance criteria, project standards, and story-sized implementation plans.</p>
+      <h2>How they connect to Hal</h2>
+      <p>Hal is a terminal-first CLI for PRD-driven coding loops. Use the generated markdown as source material, then run a small loop and inspect the resulting commits, reports, and changed files before merging.</p>
+    </div>
+  </section>
+  <SiteFooter />
+</Layout>
