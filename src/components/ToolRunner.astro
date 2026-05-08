@@ -1,0 +1,339 @@
+---
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+---
+
+<section class="tool-shell" data-tool-root={slug}>
+  <div class="tool-panel">
+    <div class="tool-panel__head">
+      <p class="kicker">Free tool</p>
+      <h2>Run the tool</h2>
+      <p>Get a useful first result immediately. Email is only requested if you want the full markdown export.</p>
+    </div>
+
+    <form class="tool-form" data-tool-form>
+      <div class="tool-fields" data-tool-fields></div>
+      <button class="btn-primary" type="submit">Generate result</button>
+      <p class="tool-error" data-tool-error hidden></p>
+    </form>
+  </div>
+
+  <div class="tool-results" data-tool-results hidden>
+    <div class="tool-result-card">
+      <div class="tool-result-card__head">
+        <div>
+          <p class="kicker">Preview</p>
+          <h2>Your free result</h2>
+        </div>
+        <button class="btn-ghost compact" type="button" data-copy-preview>Copy preview</button>
+      </div>
+      <pre data-preview-output></pre>
+    </div>
+
+    <div class="tool-result-card lead-card" data-lead-card>
+      <div>
+        <p class="kicker">Export</p>
+        <h2>Get the full markdown export</h2>
+        <p>Enter your email to unlock the complete report, copy button, and markdown download. The first result above stays free.</p>
+      </div>
+      <form class="lead-form" name="tool-lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-lead-form>
+        <input type="hidden" name="form-name" value="tool-lead" />
+        <input type="hidden" name="tool" value={slug} />
+        <p class="hidden-field"><label>Do not fill this out <input name="bot-field" /></label></p>
+        <label>
+          Work email
+          <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
+        </label>
+        <label>
+          Which coding agent do you use?
+          <select name="agent">
+            <option>Codex</option>
+            <option>Claude Code</option>
+            <option>Pi</option>
+            <option>Other / evaluating</option>
+          </select>
+        </label>
+        <button class="btn-primary" type="submit">Unlock export</button>
+        <p class="tool-note">Static fallback: if no form endpoint is configured by the host, the export unlocks in this browser.</p>
+      </form>
+    </div>
+
+    <div class="tool-result-card full-card" data-full-card hidden>
+      <div class="tool-result-card__head">
+        <div>
+          <p class="kicker">Markdown</p>
+          <h2>Full export</h2>
+        </div>
+        <div class="tool-actions">
+          <button class="btn-ghost compact" type="button" data-copy-full>Copy</button>
+          <button class="btn-ghost compact" type="button" data-download-full>Download .md</button>
+        </div>
+      </div>
+      <pre data-full-output></pre>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tool-shell { display: grid; gap: 1rem; margin: 2rem 0 0; }
+  .tool-panel, .tool-result-card { border: 1px solid var(--border-subtle); background: var(--bg-surface); border-radius: 1rem; padding: clamp(1rem, 3vw, 1.35rem); }
+  .tool-panel__head, .tool-result-card__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+  .tool-panel h2, .tool-result-card h2 { font-size: clamp(1.25rem, 2.4vw, 1.65rem); letter-spacing: -0.03em; margin-bottom: 0.35rem; }
+  .tool-panel p, .lead-card p, .tool-note { color: var(--text-secondary); }
+  .tool-form, .lead-form { display: grid; gap: 1rem; }
+  .tool-fields { display: grid; gap: 1rem; }
+  .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .tool-form label, .lead-form label { display: grid; gap: 0.45rem; color: var(--text-primary); font-size: 0.92rem; font-weight: 500; }
+  .tool-form input, .tool-form textarea, .tool-form select, .lead-form input, .lead-form select { width: 100%; border: 1px solid var(--border-subtle); background: #0c0c10; color: var(--text-primary); border-radius: 0.7rem; padding: 0.8rem 0.85rem; font: inherit; }
+  .tool-form textarea { min-height: 190px; resize: vertical; }
+  .tool-form input:focus, .tool-form textarea:focus, .tool-form select:focus, .lead-form input:focus, .lead-form select:focus { outline: 2px solid rgba(220, 38, 38, 0.5); outline-offset: 2px; }
+  .tool-error { color: #ff8585 !important; }
+  .tool-results { display: grid; gap: 1rem; }
+  .tool-result-card pre { white-space: pre-wrap; overflow-x: auto; color: #f2f3f7; line-height: 1.65; font-size: 0.9rem; font-family: var(--font-mono); background: #0c0c10; border: 1px solid var(--border-subtle); border-radius: 0.75rem; padding: 1rem; }
+  .lead-card { display: grid; gap: 1rem; background: linear-gradient(135deg, rgba(220, 38, 38, 0.12), rgba(255, 255, 255, 0.025) 42%), var(--bg-surface); }
+  .tool-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .compact { padding: 0.55rem 0.75rem; font-size: 0.84rem; }
+  .hidden-field { display: none; }
+  @media (max-width: 720px) { .field-grid { grid-template-columns: 1fr; } .tool-panel__head, .tool-result-card__head { display: grid; } }
+</style>
+
+<script define:vars={{ slug }}>
+  const configs = {
+    "prd-readiness-checker": {
+      filename: "prd-readiness-report.md",
+      fields: [
+        { name: "brief", label: "Paste your PRD or feature brief", type: "textarea", placeholder: "Example: Add a saved preferences page where logged-in users can update notification settings..." }
+      ]
+    },
+    "ai-coding-prd-generator": {
+      filename: "ai-coding-prd.md",
+      fields: [
+        { name: "feature", label: "Feature name", placeholder: "Saved notification preferences" },
+        { name: "user", label: "Primary user", placeholder: "Logged-in account owner" },
+        { name: "goal", label: "User goal", placeholder: "Control which product emails they receive" },
+        { name: "stack", label: "Stack or repo context", placeholder: "Astro, TypeScript, Postgres" },
+        { name: "current", label: "Current behavior", type: "textarea", placeholder: "Users cannot change notification settings today." },
+        { name: "desired", label: "Desired behavior", type: "textarea", placeholder: "Users can view, update, and persist notification preferences." },
+        { name: "constraints", label: "Constraints / non-goals", type: "textarea", placeholder: "Do not change billing emails. Keep existing auth flow." }
+      ]
+    },
+    "acceptance-criteria-generator": {
+      filename: "acceptance-criteria.md",
+      fields: [
+        { name: "feature", label: "Feature idea", type: "textarea", placeholder: "Add a dark mode toggle with system preference detection." },
+        { name: "role", label: "User role", placeholder: "Logged-in user" },
+        { name: "app", label: "Application type", placeholder: "SaaS dashboard" },
+        { name: "success", label: "Success behavior", type: "textarea", placeholder: "The chosen theme persists and applies immediately." },
+        { name: "failure", label: "Important failure cases", type: "textarea", placeholder: "Missing localStorage, unsupported system preference, unauthenticated state." }
+      ]
+    },
+    "agents-md-generator": {
+      filename: "AGENTS.md",
+      fields: [
+        { name: "stack", label: "Tech stack", placeholder: "Astro, TypeScript, Bun" },
+        { name: "packageManager", label: "Package manager", placeholder: "bun" },
+        { name: "test", label: "Test/build command", placeholder: "bun run build" },
+        { name: "lint", label: "Lint/typecheck command", placeholder: "bun run lint" },
+        { name: "agent", label: "Primary agent workflow", type: "select", options: ["Codex", "Claude Code", "Pi", "Multiple agents"] },
+        { name: "architecture", label: "Architecture rules", type: "textarea", placeholder: "Use content collections for durable SEO pages. Keep interactive tools file-based." },
+        { name: "forbidden", label: "Forbidden patterns", type: "textarea", placeholder: "Do not add dependencies without approval. Do not invent product claims." }
+      ]
+    },
+    "ai-coding-task-splitter": {
+      filename: "ai-coding-task-plan.md",
+      fields: [
+        { name: "task", label: "Paste the coding task", type: "textarea", placeholder: "Refactor authentication and add team invitations with role-based access." },
+        { name: "stack", label: "Stack or system context", placeholder: "Next.js, Prisma, Stripe, Postgres" },
+        { name: "touches", label: "Expected files or systems touched", placeholder: "auth, database schema, UI, email templates" },
+        { name: "risk", label: "Risk tolerance", type: "select", options: ["Conservative", "Normal", "Aggressive"] }
+      ]
+    }
+  };
+
+  const root = document.querySelector(`[data-tool-root="${slug}"]`);
+  const config = configs[slug];
+
+  function valueOf(form, name) {
+    return (new FormData(form).get(name) || "").toString().trim();
+  }
+
+  function words(text) {
+    return text.toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+  }
+
+  function includesAny(text, terms) {
+    const lower = text.toLowerCase();
+    return terms.some((term) => lower.includes(term));
+  }
+
+  function line(title, ok, fix) {
+    return `${ok ? "✓" : "•"} ${title}${ok ? "" : ` — ${fix}`}`;
+  }
+
+  function fieldHtml(field) {
+    if (field.type === "textarea") {
+      return `<label>${field.label}<textarea name="${field.name}" placeholder="${field.placeholder || ""}" required></textarea></label>`;
+    }
+    if (field.type === "select") {
+      return `<label>${field.label}<select name="${field.name}">${field.options.map((o) => `<option>${o}</option>`).join("")}</select></label>`;
+    }
+    return `<label>${field.label}<input name="${field.name}" placeholder="${field.placeholder || ""}" required /></label>`;
+  }
+
+  function renderFields() {
+    const container = root.querySelector("[data-tool-fields]");
+    const fields = config.fields.map(fieldHtml);
+    if (fields.length > 2) {
+      container.innerHTML = `<div class="field-grid">${fields.slice(0, 4).join("")}</div>${fields.slice(4).join("")}`;
+    } else {
+      container.innerHTML = fields.join("");
+    }
+  }
+
+  function prdReadiness(form) {
+    const brief = valueOf(form, "brief");
+    const checks = [
+      ["User or actor is clear", includesAny(brief, ["user", "customer", "admin", "developer", "visitor", "account"]), "name who the change is for"],
+      ["Problem or goal is stated", includesAny(brief, ["problem", "goal", "so that", "need", "want", "job"]), "state the user problem and desired outcome"],
+      ["Scope is bounded", includesAny(brief, ["scope", "include", "must", "should", "non-goal", "out of scope"]), "list what is included and excluded"],
+      ["Acceptance criteria exist", includesAny(brief, ["acceptance", "given", "when", "then", "done", "criteria"]), "add testable acceptance criteria"],
+      ["Edge cases are mentioned", includesAny(brief, ["edge", "error", "empty", "failure", "invalid", "permission"]), "add failure states and edge cases"],
+      ["Review or test plan exists", includesAny(brief, ["test", "review", "verify", "qa", "lint", "build"]), "say how a developer should verify the work"]
+    ];
+    const vague = ["fast", "simple", "easy", "intuitive", "robust", "nice", "better", "clean"].filter((term) => includesAny(brief, [term]));
+    const score = Math.max(0, Math.min(100, Math.round((checks.filter((c) => c[1]).length / checks.length) * 85 + (brief.length > 700 ? 10 : brief.length > 300 ? 5 : 0) - vague.length * 4)));
+    const preview = `PRD readiness score: ${score}/100\n\n${checks.map((c) => line(c[0], c[1], c[2])).join("\n")}\n\nVague words flagged: ${vague.length ? vague.join(", ") : "none found"}`;
+    const missing = checks.filter((c) => !c[1]).map((c) => `- ${c[2]}`).join("\n") || "- No critical missing sections found. Tighten language and keep stories small.";
+    const full = `# PRD Readiness Report\n\nScore: ${score}/100\n\n## Checks\n\n${checks.map((c) => line(c[0], c[1], c[2])).join("\n")}\n\n## Missing or weak sections\n\n${missing}\n\n## Rewrite checklist\n\n- Name the user and the problem.\n- Define what is in scope and out of scope.\n- Add 3-7 acceptance criteria.\n- Add edge cases and failure behavior.\n- Add test, build, and manual review steps.\n\n## Hal-ready prompt\n\nUse Hal to plan this as small reviewable stories. Preserve constraints, write acceptance criteria for each story, and include a developer review checklist before implementation starts.\n\n## Original brief\n\n${brief}`;
+    return { preview, full };
+  }
+
+  function prdGenerator(form) {
+    const feature = valueOf(form, "feature");
+    const user = valueOf(form, "user");
+    const goal = valueOf(form, "goal");
+    const stack = valueOf(form, "stack");
+    const current = valueOf(form, "current");
+    const desired = valueOf(form, "desired");
+    const constraints = valueOf(form, "constraints");
+    const stories = [`As ${user}, I can access ${feature} so I can ${goal}.`, `As ${user}, I can complete the primary path without losing existing behavior.`, `As a developer, I can verify ${feature} with clear tests and review steps.`];
+    const full = `# PRD: ${feature}\n\n## User and goal\n\nPrimary user: ${user}\n\nGoal: ${goal}\n\n## Context\n\nStack/repo context: ${stack}\n\nCurrent behavior:\n${current}\n\nDesired behavior:\n${desired}\n\n## Scope\n\n- Implement the primary user path for ${feature}.\n- Preserve existing behavior unless explicitly changed.\n- Keep the change small enough for reviewable commits.\n\n## Constraints and non-goals\n\n${constraints}\n\n## User stories\n\n${stories.map((s, i) => `${i + 1}. ${s}`).join("\n")}\n\n## Acceptance criteria\n\n- Given the primary user is eligible, when they use ${feature}, then the desired behavior is visible and persisted where appropriate.\n- Given invalid or missing input, when the user submits, then the interface shows a clear error and does not corrupt existing state.\n- Given existing flows, when this feature ships, then unrelated behavior remains unchanged.\n- Given a developer reviews the change, when tests/build are run, then the expected verification path is documented.\n\n## Suggested Hal planning prompt\n\nPlan a small implementation loop for ${feature}. Use the PRD above, split the work into reviewable stories, include acceptance criteria per story, and identify test/review commands before implementation.`;
+    return { preview: full.split("\n").slice(0, 24).join("\n") + "\n\n[Full markdown export available after email.]", full };
+  }
+
+  function acceptanceCriteria(form) {
+    const feature = valueOf(form, "feature");
+    const role = valueOf(form, "role");
+    const app = valueOf(form, "app");
+    const success = valueOf(form, "success");
+    const failure = valueOf(form, "failure");
+    const full = `# Acceptance Criteria\n\nFeature: ${feature}\nApplication: ${app}\nPrimary user: ${role}\n\n## Given / When / Then\n\n1. Given ${role} is on the relevant screen, when they use the feature, then ${success}.\n2. Given required input is missing or invalid, when ${role} submits the flow, then the system blocks the action and explains what to fix.\n3. Given existing data exists, when the feature is used, then prior state is preserved unless the user explicitly changes it.\n4. Given the feature completes successfully, when ${role} returns later, then the expected state is still visible where persistence is required.\n5. Given the feature is unavailable or errors, when ${role} attempts the action, then the UI fails safely with a recoverable message.\n\n## Edge cases to test\n\n${failure.split(/[\n,]+/).filter(Boolean).map((item) => `- ${item.trim()}`).join("\n") || "- Empty state\n- Invalid input\n- Permission denied\n- Network or persistence failure"}\n\n## Review checklist\n\n- Criteria are observable by a reviewer.\n- Error and empty states are covered.\n- Existing behavior is protected.\n- Test/build command is run before merge.`;
+    return { preview: full.split("\n").slice(0, 18).join("\n") + "\n\n[Full checklist available after email.]", full };
+  }
+
+  function agentsMd(form) {
+    const stack = valueOf(form, "stack");
+    const packageManager = valueOf(form, "packageManager");
+    const test = valueOf(form, "test");
+    const lint = valueOf(form, "lint");
+    const agent = valueOf(form, "agent");
+    const architecture = valueOf(form, "architecture");
+    const forbidden = valueOf(form, "forbidden");
+    const full = `# AGENTS.md\n\n## Project context\n\nStack: ${stack}\nPackage manager: ${packageManager}\nPrimary agent workflow: ${agent}\n\n## Commands\n\n- Install dependencies: \`${packageManager} install\`\n- Build/test: \`${test}\`\n- Lint/typecheck: \`${lint}\`\n\n## Architecture rules\n\n${architecture.split("\n").filter(Boolean).map((item) => `- ${item.replace(/^-\s*/, "")}`).join("\n")}\n\n## Forbidden patterns\n\n${forbidden.split("\n").filter(Boolean).map((item) => `- ${item.replace(/^-\s*/, "")}`).join("\n")}\n\n## Agent workflow rules\n\n- Read local instructions before editing.\n- Keep changes scoped to the requested story.\n- Prefer small, reviewable commits.\n- Do not invent product claims, external integrations, metrics, or customer proof.\n- Run the listed verification command when safe.\n- Summarize changed files, tests run, and remaining risks.\n\n## Review expectations\n\nDevelopers must inspect generated code before merging. Agent output should leave clear state: changed files, commands run, known gaps, and next review steps.`;
+    return { preview: full.split("\n").slice(0, 22).join("\n") + "\n\n[Full AGENTS.md available after email.]", full };
+  }
+
+  function taskSplitter(form) {
+    const task = valueOf(form, "task");
+    const stack = valueOf(form, "stack");
+    const touches = valueOf(form, "touches");
+    const tolerance = valueOf(form, "risk");
+    const highRiskTerms = ["auth", "authentication", "payment", "billing", "stripe", "migration", "security", "permission", "role", "refactor", "database", "schema"];
+    const riskHits = highRiskTerms.filter((term) => includesAny(`${task} ${touches}`, [term]));
+    const complexity = Math.min(5, Math.max(1, touches.split(/[ ,]+/).filter(Boolean).length));
+    const risk = Math.min(100, 25 + riskHits.length * 10 + complexity * 8 + (tolerance === "Conservative" ? 10 : tolerance === "Aggressive" ? -8 : 0));
+    const label = risk >= 70 ? "High" : risk >= 45 ? "Medium" : "Lower";
+    const stories = ["Map current behavior and constraints before editing code", "Implement the smallest safe path for the primary behavior", "Add edge-case handling and validation", "Run verification and prepare review notes", "Archive/report remaining follow-up work"];
+    const full = `# AI Coding Task Plan\n\nRisk score: ${risk}/100 (${label})\n\nTask:\n${task}\n\nStack/context: ${stack}\nExpected areas touched: ${touches}\n\n## Risk flags\n\n${riskHits.length ? riskHits.map((r) => `- ${r}`).join("\n") : "- No high-risk keywords detected, but developer review is still required."}\n\n## Suggested story split\n\n${stories.map((s, i) => `${i + 1}. ${s}`).join("\n")}\n\n## Review checkpoints\n\n- Confirm scope before implementation.\n- Review data, auth, permissions, and destructive operations manually.\n- Run build/test commands before merge.\n- Inspect generated commits and reports.\n\n## Hal loop suggestion\n\nStart with story 1 or 2 only. Run a small loop, inspect output, then continue with the next story if the review trail is clean.`;
+    return { preview: full.split("\n").slice(0, 20).join("\n") + "\n\n[Full story plan available after email.]", full };
+  }
+
+  function run(form) {
+    if (slug === "prd-readiness-checker") return prdReadiness(form);
+    if (slug === "ai-coding-prd-generator") return prdGenerator(form);
+    if (slug === "acceptance-criteria-generator") return acceptanceCriteria(form);
+    if (slug === "agents-md-generator") return agentsMd(form);
+    if (slug === "ai-coding-task-splitter") return taskSplitter(form);
+    return { preview: "Tool not found.", full: "Tool not found." };
+  }
+
+  function copy(text) {
+    navigator.clipboard?.writeText(text);
+  }
+
+  function download(filename, text) {
+    const blob = new Blob([text], { type: "text/markdown;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  let latest = { preview: "", full: "" };
+
+  if (root && config) {
+    renderFields();
+    const form = root.querySelector("[data-tool-form]");
+    const error = root.querySelector("[data-tool-error]");
+    const results = root.querySelector("[data-tool-results]");
+    const preview = root.querySelector("[data-preview-output]");
+    const full = root.querySelector("[data-full-output]");
+    const leadForm = root.querySelector("[data-lead-form]");
+    const leadCard = root.querySelector("[data-lead-card]");
+    const fullCard = root.querySelector("[data-full-card]");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const required = [...form.querySelectorAll("input[required], textarea[required]")];
+      const empty = required.find((input) => !input.value.trim());
+      if (empty) {
+        error.textContent = "Fill out the required fields first.";
+        error.hidden = false;
+        empty.focus();
+        return;
+      }
+      error.hidden = true;
+      latest = run(form);
+      preview.textContent = latest.preview;
+      full.textContent = latest.full;
+      results.hidden = false;
+      fullCard.hidden = true;
+      leadCard.hidden = false;
+      results.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    root.querySelector("[data-copy-preview]").addEventListener("click", () => copy(latest.preview));
+    root.querySelector("[data-copy-full]").addEventListener("click", () => copy(latest.full));
+    root.querySelector("[data-download-full]").addEventListener("click", () => download(config.filename, latest.full));
+
+    leadForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(leadForm);
+      data.set("tool", slug);
+      data.set("result_length", String(latest.full.length));
+      try {
+        await fetch("/", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: new URLSearchParams(data).toString() });
+      } catch (error) {
+        // Static hosts without form handling still unlock the export in-browser.
+      }
+      localStorage.setItem(`hal-tool-lead-${slug}`, JSON.stringify({ email: data.get("email"), agent: data.get("agent"), at: new Date().toISOString() }));
+      leadCard.hidden = true;
+      fullCard.hidden = false;
+      full.textContent = latest.full;
+    });
+  }
+</script>

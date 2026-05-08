@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import ToolPage from "../../components/ToolPage.astro";
+import { sortToolsByOrder, toolSlug } from "../../data/tools";
+
+export async function getStaticPaths() {
+  const entries = sortToolsByOrder(await getCollection("tools"));
+  return entries.map((entry) => ({
+    params: { slug: toolSlug(entry) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const slug = toolSlug(entry);
+const path = `/tools/${slug}`;
+---
+
+<ToolPage entry={entry} path={path} />

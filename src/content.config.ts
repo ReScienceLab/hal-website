@@ -5,7 +5,7 @@ const pageSchema = z.object({
   title: z.string(),
   description: z.string(),
   h1: z.string(),
-  pageType: z.enum(["feature", "docs", "faq", "glossary"]),
+  pageType: z.enum(["feature", "docs", "faq", "glossary", "tool"]),
   noindex: z.boolean().default(false),
   summary: z.string().optional(),
   faqs: z.array(z.object({
@@ -17,6 +17,12 @@ const pageSchema = z.object({
 
 const featureSchema = pageSchema.extend({
   order: z.number().int().positive()
+});
+
+const toolSchema = pageSchema.extend({
+  order: z.number().int().positive(),
+  category: z.enum(["analyzer", "generator", "validator", "calculator", "previewer", "other"]),
+  primaryKeyword: z.string()
 });
 
 export const collections = {
@@ -35,5 +41,9 @@ export const collections = {
   glossary: defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./src/content/glossary" }),
     schema: pageSchema
+  }),
+  tools: defineCollection({
+    loader: glob({ pattern: "**/*.md", base: "./src/content/tools" }),
+    schema: toolSchema
   })
 };
