@@ -4,7 +4,12 @@ import Layout from "../layouts/Layout.astro";
 import SiteNav from "./SiteNav.astro";
 import SiteFooter from "./SiteFooter.astro";
 import { featureSlug, sortFeaturesByOrder } from "../data/features";
-import { SITE } from "../data/site";
+import { SITE, absoluteUrl } from "../data/site";
+
+interface PageFaq {
+  question: string;
+  answer: string;
+}
 
 interface Props {
   entry: {
@@ -14,7 +19,10 @@ interface Props {
       title: string;
       description: string;
       h1: string;
+      summary?: string;
+      faqs?: PageFaq[];
       related?: string[];
+      noindex?: boolean;
     };
   };
   path: string;
@@ -25,6 +33,7 @@ const { entry, path, eyebrow } = Astro.props;
 const { Content } = await render(entry);
 
 const collection = entry.collection;
+const faqs = entry.data.faqs ?? [];
 let related: Props["entry"][] = [];
 
 if (entry.data.related && entry.data.related.length > 0) {
@@ -37,9 +46,21 @@ if (entry.data.related && entry.data.related.length > 0) {
   const all = sortFeaturesByOrder(await getCollection("features"));
   related = all.filter((e) => e.id !== entry.id).slice(0, 3) as Props["entry"][];
 }
+
+const schema = faqs.length > 0
+  ? [{
+      "@type": "FAQPage",
+      "@id": `${absoluteUrl(path)}#faq`,
+      mainEntity: faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      })),
+    }]
+  : [];
 ---
 
-<Layout title={entry.data.title} description={entry.data.description} path={path}>
+<Layout title={entry.data.title} description={entry.data.description} path={path} schema={schema} noindex={entry.data.noindex ?? false}>
   <SiteNav />
   <section class="page-hero">
     <div class="page-container">
@@ -47,24 +68,44 @@ if (entry.data.related && entry.data.related.length > 0) {
       <h1>{entry.data.h1}</h1>
       <p>{entry.data.description}</p>
       <div class="btn-row">
-        <a class="btn-primary" href="/docs">Use it in the loop</a>
-        <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">View GitHub</a>
+        <a class="btn-primary" href="/docs">Run the first loop</a>
+        <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">Inspect source</a>
       </div>
     </div>
   </section>
 
   <section class="page-section">
     <div class="page-container prose">
+      {entry.data.summary && (
+        <div class="info-card">
+          <p class="kicker">Why it matters</p>
+          <p>{entry.data.summary}</p>
+        </div>
+      )}
       <Content />
     </div>
   </section>
+
+  {faqs.length > 0 && (
+    <section class="page-section" id="faq">
+      <div class="page-container">
+        <div class="section-head center">
+          <h2>FAQ</h2>
+          <p>Short answers before you put this into an agent workflow.</p>
+        </div>
+        <div class="faq-list">
+          {faqs.map((faq) => <article class="faq-item"><h3>{faq.question}</h3><p>{faq.answer}</p></article>)}
+        </div>
+      </div>
+    </section>
+  )}
 
   {related.length > 0 && (
     <section class="page-section">
       <div class="page-container">
         <div class="section-head center">
           <h2>Related features</h2>
-          <p>Keep exploring the pieces of the coding loop.</p>
+          <p>Keep exploring the pieces of a reviewable coding loop.</p>
         </div>
         <div class="card-grid">
           {related.map((item) => (
