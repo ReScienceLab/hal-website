@@ -5,7 +5,7 @@ export const SITE = {
     "Hal is a terminal-first CLI for PRD-native coding loops with AI agents such as Codex, Claude Code, and Pi.",
   repoUrl: "https://github.com/ReScienceLab/hal",
   rescienceUrl: "https://rescience.com/products/hal",
-  installCommand: "curl -fsSL https://hal.run/install.sh | bash",
+  installCommand: "brew tap j-yw/tap && brew install --cask hal",
   version: "v0.0.8",
 } as const;
 
@@ -19,9 +19,20 @@ export const ROUTES = [
   { path: "/testimonials", title: "Hal Proof - Inspectable Trust Signals", h1: "Proof you can inspect", description: "Hal trust signals without fake logos or invented metrics: source code, MIT license, docs, ReScience Lab context, and transparent product status.", pageType: "Trust" },
 ];
 
+function shouldUseTrailingSlash(path: string) {
+  if (path === "/") return false;
+  const cleanPath = path.split("#")[0].split("?")[0];
+  return !/\.[a-z0-9]+$/i.test(cleanPath);
+}
+
 export function absoluteUrl(path = "/") {
   const normalized = path.startsWith("/") ? path : `/${path}`;
-  return `${SITE.domain}${normalized === "/" ? "" : normalized}`;
+  const [beforeHash, hash = ""] = normalized.split("#");
+  const [pathname, query = ""] = beforeHash.split("?");
+  const withSlash = shouldUseTrailingSlash(pathname) && !pathname.endsWith("/")
+    ? `${pathname}/`
+    : pathname;
+  return `${SITE.domain}${withSlash === "/" ? "" : withSlash}${query ? `?${query}` : ""}${hash ? `#${hash}` : ""}`;
 }
 
 export function ogImagePath(path = "/") {

@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const slug = toolSlug(entry);
-const path = `/tools/${slug}`;
+const path = `/tools/${slug}/`;
 ---
 
 <ToolPage entry={entry} path={path} />

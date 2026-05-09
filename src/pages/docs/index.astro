@@ -12,7 +12,7 @@ const faqs = [
 ];
 const schema = [{
   "@type": "FAQPage",
-  "@id": `${SITE.domain}/docs#faq`,
+  "@id": `${SITE.domain}/docs/#faq`,
   mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })),
 }];
 ---
@@ -24,7 +24,7 @@ const schema = [{
       <h1>Hal docs for reviewable coding loops</h1>
       <p>Install Hal, initialize the repo workflow, turn requirements into stories, run a bounded agent loop, and inspect the result before merging.</p>
       <div class="btn-row">
-        <a class="btn-primary" href="/getting-started">Run the quickstart</a>
+        <a class="btn-primary" href="/docs/first-loop/">Run the first loop</a>
         <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">Read GitHub README</a>
       </div>
     </div>
@@ -35,6 +35,7 @@ const schema = [{
       <h2>Install</h2>
       <p>Use the current website install command, then open the GitHub README if you need repository-specific setup details before running it in a project.</p>
       <pre><code>{SITE.installCommand}</code></pre>
+      <p><a href="/docs/install/">Read the install guide</a> for verification steps, engine prerequisites, and a safe repository setup.</p>
 
       <h2>First loop</h2>
       <p>Your first Hal loop should be boring on purpose. Pick a bounded change with clear acceptance criteria so you can inspect the plan, the changed files, and the final state in one sitting.</p>
@@ -55,6 +56,18 @@ hal run`}</code></pre>
 
       <h2>Review checklist</h2>
       <p>Before merging agent output, inspect the changed files, commits, reports, tests, and unresolved acceptance criteria. Hal structures the loop; the developer still owns acceptance.</p>
+      <p><a href="/docs/review-before-merge/">Use the review-before-merge checklist</a> before accepting any generated code.</p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="page-container">
+      <div class="section-head center"><h2>Detailed docs</h2><p>Move from installation to a bounded first loop and a human-owned merge decision.</p></div>
+      <div class="card-grid">
+        <a class="info-card" href="/docs/install/"><p class="kicker">Setup</p><h3>Install Hal CLI</h3><p>Install the command, verify it works, and check engine prerequisites.</p></a>
+        <a class="info-card" href="/docs/first-loop/"><p class="kicker">Quickstart</p><h3>Run your first Hal loop</h3><p>Plan, convert, validate, run, and inspect a small task.</p></a>
+        <a class="info-card" href="/docs/review-before-merge/"><p class="kicker">Review</p><h3>Review before merge</h3><p>Use a checklist for diffs, commits, reports, tests, and acceptance criteria.</p></a>
+      </div>
     </div>
   </section>
 

@@ -1,7 +1,7 @@
 # PAGEWELL.md
 
 Generated: 2026-05-04
-Last reviewed: 2026-05-04
+Last reviewed: 2026-05-09
 
 PAGEWELL.md is the source of truth for Hal website page generation and SEO/GEO maintenance. Use it with `DESIGN.md` before creating or editing pages.
 
@@ -14,6 +14,7 @@ PAGEWELL.md is the source of truth for Hal website page generation and SEO/GEO m
 - Source repository: https://github.com/ReScienceLab/hal
 - Category: Terminal-first CLI for PRD-native, reviewable AI coding loops
 - One-sentence description: Hal is a CLI for running PRD-native development loops with AI coding agents such as Codex, Claude Code, and Pi.
+- Install command shown on this website: `brew tap j-yw/tap && brew install --cask hal`
 - Primary audience:
   - solo developers and technical founders
   - developers using AI coding agents
@@ -63,19 +64,23 @@ See `AGENTS.md` for the canonical ReScience Lab content collection pattern.
 
 **Rule:** All durable SEO/GEO pages must use Astro Content Collections (`.md` files in `src/content/` + dynamic `[slug].astro` routes + shared template component).
 
-**Current state:** Feature detail pages and free tool detail pages now use Astro Content Collections. Features live in `src/content/features/*.md` and are served by `src/pages/features/[slug].astro`; tools live in `src/content/tools/*.md` and are served by `src/pages/tools/[slug].astro`. TypeScript data files remain for shared site constants, navigation, ordering helpers, and UI wiring.
+**Current state:** Feature detail pages, free tool detail pages, documentation pages, FAQ pages, and glossary pages now use Astro Content Collections. TypeScript data files remain for shared site constants, navigation, ordering helpers, and UI wiring.
 
 **Remaining collection gaps:**
-- `src/content/docs/*.md` — documentation pages still need durable entries
-- `src/content/faq/*.md` — FAQ pages still need durable entries
-- `src/content/glossary/*.md` — glossary pages still need durable entries
+- None for the current public SEO/GEO taxonomy.
 
 **Implemented collection routes:**
 - `src/content/features/*.md` — feature detail pages
 - `src/content/tools/*.md` — free tool metadata, FAQs, and supporting content
+- `src/content/docs/*.md` — durable documentation entries
+- `src/content/faq/*.md` — durable FAQ entries
+- `src/content/glossary/*.md` — durable glossary entries
 - `src/components/ContentPage.astro` — shared content template
 - `src/pages/features/[slug].astro` — feature dynamic route
 - `src/pages/tools/[slug].astro` — tool dynamic route
+- `src/pages/docs/[slug].astro` — docs dynamic route
+- `src/pages/faq/[slug].astro` — FAQ dynamic route
+- `src/pages/glossary/[slug].astro` — glossary dynamic route
 
 Adding a new page = creating one `.md` file. No `.astro` duplication.
 
