@@ -96,6 +96,9 @@ function svg({ title, pageType }: OgProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
   const features = sortFeaturesByOrder(await getCollection("features"));
   const tools = sortToolsByOrder(await getCollection("tools"));
+  const docs = await getCollection("docs");
+  const faq = await getCollection("faq");
+  const glossary = await getCollection("glossary");
   const staticRoutes = ROUTES.map((route) => ({
     params: { slug: slugForPath(route.path) },
     props: { title: route.h1, pageType: route.pageType },
@@ -108,7 +111,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
     params: { slug: slugForPath(`/tools/${toolSlug(tool)}`) },
     props: { title: tool.data.h1, pageType: "Tool" },
   }));
-  return [...staticRoutes, ...featureRoutes, ...toolRoutes];
+  const contentRoutes = [
+    ...docs.map((entry) => ({ params: { slug: slugForPath(`/docs/${entry.id.replace(/\.md$/, "")}`) }, props: { title: entry.data.h1, pageType: "Docs" } })),
+    ...faq.map((entry) => ({ params: { slug: slugForPath(`/faq/${entry.id.replace(/\.md$/, "")}`) }, props: { title: entry.data.h1, pageType: "FAQ" } })),
+    ...glossary.map((entry) => ({ params: { slug: slugForPath(`/glossary/${entry.id.replace(/\.md$/, "")}`) }, props: { title: entry.data.h1, pageType: "Glossary" } })),
+  ];
+  return [...staticRoutes, ...featureRoutes, ...toolRoutes, ...contentRoutes];
 };
 
 export const GET: APIRoute = ({ props }) =>

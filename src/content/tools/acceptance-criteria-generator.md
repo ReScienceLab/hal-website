@@ -7,6 +7,8 @@ order: 3
 category: "generator"
 primaryKeyword: "acceptance criteria generator"
 noindex: false
+updatedAt: "2026-05-09"
+reviewedBy: "ReScience Lab"
 summary: "Generate concrete acceptance criteria and edge cases so agent-written code has something specific to satisfy."
 faqs:
   - question: "What are good acceptance criteria for AI coding?"
@@ -20,6 +22,10 @@ related:
   - "prd-readiness-checker"
   - "ai-coding-task-splitter"
 ---
+
+## What does an acceptance criteria generator do?
+
+An acceptance criteria generator turns a feature idea into observable conditions for accepting generated code. It helps developers define expected behavior, edge cases, and review checks before implementation starts, so an AI coding loop has a clearer target than a vague natural-language request.
 
 ## How to use the acceptance criteria generator
 
@@ -36,3 +42,12 @@ They reduce arguments with the agent after the fact. Instead of asking whether a
 ## Recommended workflow
 
 Generate criteria first, add them to a PRD or task-splitting workflow, then run implementation only after the story is small enough to review.
+
+## How this tool fits the Hal workflow
+
+Use this tool before a coding agent edits files. Then move from tool output into [PRD-driven planning](/features/prd-driven-planning/), a [first Hal loop](/docs/first-loop/), or a [review-before-merge checklist](/docs/review-before-merge/). Treat generated text as a draft and verify it against the repository before use.
+
+## Verification rule
+
+Before adopting Hal, inspect the [source repository](https://github.com/ReScienceLab/hal), [install guide](/docs/install/), [pricing page](/pricing/), and [machine-readable pricing](/pricing.md). This tool does not guarantee code quality, test success, or merge safety.
+

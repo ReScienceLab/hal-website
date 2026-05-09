@@ -7,6 +7,8 @@ const pageSchema = z.object({
   h1: z.string(),
   pageType: z.enum(["feature", "docs", "faq", "glossary", "tool"]),
   noindex: z.boolean().default(false),
+  updatedAt: z.string(),
+  reviewedBy: z.string().default("ReScience Lab"),
   summary: z.string().optional(),
   faqs: z.array(z.object({
     question: z.string(),

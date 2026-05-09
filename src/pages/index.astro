@@ -500,15 +500,17 @@ import { SITE } from '../data/site';
 
   <nav>
     <div class="container nav-inner">
-      <a href="#" class="nav-logo">
+      <a href="/" class="nav-logo" aria-label="Hal home">
         <span class="eye"></span>
         hal
       </a>
       <div class="nav-links">
-        <a href="#features">Features</a>
+        <a href="/features/">Features</a>
         <a href="#workflow">Workflow</a>
-        <a href="/tools">Tools</a>
-        <a href="/docs">Docs</a>
+        <a href="/tools/">Tools</a>
+        <a href="/pricing/">Pricing</a>
+        <a href="/testimonials/">Proof</a>
+        <a href="/docs/">Docs</a>
         <a href={SITE.repoUrl} target="_blank" rel="noreferrer">GitHub</a>
       </div>
       <a href="#install" class="nav-cta">Install</a>
@@ -525,8 +527,8 @@ import { SITE } from '../data/site';
       <p class="subtitle">Hal turns product requirements into bounded stories, runs them through Codex, Claude Code, or Pi, and leaves reviewable commits, reports, and state before you merge.</p>
       <div class="hero-actions">
         <a href="#install" class="btn-primary">Install Hal</a>
-        <button class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL https://hal.run/install.sh | bash');this.querySelector('.copy').textContent='Copied!'">
-          <span>curl -fsSL https://hal.run/install.sh | bash</span>
+        <button class="install-cmd" onclick="navigator.clipboard.writeText('brew tap j-yw/tap && brew install --cask hal');this.querySelector('.copy').textContent='Copied!'">
+          <span>{SITE.installCommand}</span>
           <span class="copy">Copy</span>
         </button>
       </div>
@@ -584,36 +586,36 @@ import { SITE } from '../data/site';
         <p>Hal wraps AI coding agents in a loop that plans scope, bounds context, preserves state, and keeps the human in review.</p>
       </div>
       <div class="feature-grid">
-        <div class="feature-card">
+        <a class="feature-card" href="/features/prd-driven-planning/">
           <div class="icon">01 //</div>
           <h3>Plan before code</h3>
           <p>Turn product intent into stories and acceptance criteria before an agent touches the repo.</p>
-        </div>
-        <div class="feature-card">
+        </a>
+        <a class="feature-card" href="/features/fresh-context-every-story/">
           <div class="icon">02 //</div>
           <h3>Bound every story</h3>
           <p>Give each implementation story its own context so long features do not become one drifting chat.</p>
-        </div>
-        <div class="feature-card">
+        </a>
+        <a class="feature-card" href="/features/pluggable-agent-engines/">
           <div class="icon">03 //</div>
           <h3>Bring your agent</h3>
           <p>Use Codex, Claude Code, or Pi inside the same PRD-driven workflow and review process.</p>
-        </div>
-        <div class="feature-card">
+        </a>
+        <a class="feature-card" href="/features/project-standards/">
           <div class="icon">04 //</div>
           <h3>Inject local standards</h3>
           <p>Carry repo commands, conventions, and review rules into each implementation loop.</p>
-        </div>
-        <div class="feature-card">
+        </a>
+        <a class="feature-card" href="/features/archive-and-restore/">
           <div class="icon">05 //</div>
           <h3>Preserve the trail</h3>
           <p>Keep progress, reports, workflow files, and archives available for inspection or later continuation.</p>
-        </div>
-        <div class="feature-card">
+        </a>
+        <a class="feature-card" href="/features/auto-pipeline/">
           <div class="icon">06 //</div>
           <h3>Run a named pipeline</h3>
           <p>Move through plan, convert, validate, run, report, and archive behavior as explicit steps.</p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -712,8 +714,8 @@ import { SITE } from '../data/site';
       <h2>Run a small loop.<br>Review every change.</h2>
       <p>Install Hal, start with a bounded requirement, and inspect the resulting commits before merging.</p>
       <div class="hero-actions">
-        <button class="install-cmd" onclick="navigator.clipboard.writeText('curl -fsSL https://hal.run/install.sh | bash');this.querySelector('.copy').textContent='Copied!'">
-          <span>curl -fsSL https://hal.run/install.sh | bash</span>
+        <button class="install-cmd" onclick="navigator.clipboard.writeText('brew tap j-yw/tap && brew install --cask hal');this.querySelector('.copy').textContent='Copied!'">
+          <span>{SITE.installCommand}</span>
           <span class="copy">Copy</span>
         </button>
       </div>

@@ -28,7 +28,7 @@ const jsonLd = {
       "@id": `${SITE.domain}/#organization`,
       name: SITE.name,
       url: SITE.domain,
-      logo: absoluteUrl('/logo.png'),
+      logo: absoluteUrl('/favicon.svg'),
       sameAs: [SITE.repoUrl],
     },
     {
@@ -36,12 +36,23 @@ const jsonLd = {
       "@id": `${SITE.domain}/#website`,
       name: SITE.name,
       url: SITE.domain,
-      description,
+      description: SITE.description,
       publisher: { "@id": `${SITE.domain}/#organization` },
-      potentialAction: {
-        "@type": "SearchAction",
-        target: `${SITE.repoUrl}?q={search_term_string}`,
-        "query-input": "required name=search_term_string",
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${SITE.domain}/#software`,
+      name: SITE.name,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "CLI",
+      url: SITE.domain,
+      codeRepository: SITE.repoUrl,
+      description: SITE.description,
+      publisher: { "@id": `${SITE.domain}/#organization` },
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
       },
     },
     ...extraSchema,
@@ -349,6 +360,30 @@ const jsonLd = {
 
     .prose li + li {
       margin-top: 0.4rem;
+    }
+
+    .prose table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      border-radius: 0.7rem;
+      background: var(--bg-surface);
+      font-size: 0.95rem;
+    }
+
+    .prose th,
+    .prose td {
+      border: 1px solid var(--border-subtle);
+      padding: 0.75rem 0.8rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .prose th {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.04);
+      font-weight: 600;
     }
 
     .prose code {

@@ -1,10 +1,12 @@
 ---
-title: "Pluggable Agent Engines - Hal Feature"
+title: "Pluggable Agent Engines for AI Coding | Hal"
 description: "Use Codex, Claude Code, or Pi inside the same PRD-driven loop without rewriting your planning workflow."
 h1: "Bring your coding agent into the Hal loop"
 pageType: "feature"
 order: 3
 noindex: false
+updatedAt: "2026-05-09"
+reviewedBy: "ReScience Lab"
 summary: "Hal treats the coding agent as the engine, not the workflow. Keep the same PRD, stories, validation, and review trail while using Codex, Claude Code, or Pi."
 faqs:
   - question: "Which engines does this site claim Hal supports?"
@@ -18,6 +20,10 @@ related:
   - "prd-driven-planning"
   - "auto-pipeline"
 ---
+
+## What are pluggable agent engines in Hal?
+
+Pluggable agent engines mean Hal treats the coding agent as the implementation engine rather than the whole workflow. This site mentions Codex, Claude Code, and Pi as supported engines, while Hal keeps planning, validation, running, reporting, archiving, and review checkpoints consistent.
 
 ## What breaks when the agent is the workflow
 
@@ -48,3 +54,15 @@ The developer keeps the same checkpoints: plan, validate, run, inspect.
 ## How to review the setup
 
 Check the current Hal configuration, confirm the selected engine is documented in the repo, and run a small loop before handing over a larger feature. Treat engine changes like any other workflow change: test them before trusting them.
+
+## What Hal does and does not do
+
+| Hal does | Hal does not do |
+|---|---|
+| Structures PRD-native coding loops around planning, validation, implementation, reporting, and reviewable state. | Guarantee code quality, passing tests, delivery speed, revenue, rankings, or production readiness. |
+| Helps supported engines work against smaller, reviewable units of work. | Replace developer review, QA, security review, or merge judgment. |
+
+## Sources and verification
+
+Before adopting this workflow, verify the current [Hal source repository](https://github.com/ReScienceLab/hal), [install docs](/docs/install/), [pricing status](/pricing/), and [machine-readable pricing](/pricing.md). Check release notes and engine support before relying on Hal in production work.
+

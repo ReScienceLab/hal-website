@@ -1,10 +1,12 @@
 ---
-title: "PRD-Driven Planning - Hal Feature"
+title: "PRD-Driven Planning for AI Coding Agents | Hal"
 description: "Turn product intent into stories, acceptance criteria, and reviewable state before an AI coding agent touches the repo."
 h1: "Plan the work before the agent writes code"
 pageType: "feature"
 order: 1
 noindex: false
+updatedAt: "2026-05-09"
+reviewedBy: "ReScience Lab"
 summary: "Hal starts with a PRD because vague prompts create vague diffs. Planning gives the agent a bounded target and gives the developer something to review before implementation begins."
 faqs:
   - question: "Do I need a complete PRD before using Hal?"
@@ -18,6 +20,10 @@ related:
   - "project-standards"
   - "auto-pipeline"
 ---
+
+## What is PRD-driven planning for AI coding?
+
+PRD-driven planning for AI coding means turning product intent into stories, acceptance criteria, and constraints before an AI coding agent edits files. In Hal, this gives developers a reviewable plan before running implementation through supported engines such as Codex, Claude Code, or Pi.
 
 ## What breaks without planning
 
@@ -47,3 +53,15 @@ The important shift is not the command itself. It is the checkpoint. The develop
 ## How to review the plan
 
 Look for stories that are too broad, acceptance criteria that are not observable, and missing constraints such as authentication, persistence, migration, or UI behavior. If the plan is hard to review, the resulting code will be harder to trust.
+
+## What Hal does and does not do
+
+| Hal does | Hal does not do |
+|---|---|
+| Structures PRD-native coding loops around planning, validation, implementation, reporting, and reviewable state. | Guarantee code quality, passing tests, delivery speed, revenue, rankings, or production readiness. |
+| Helps supported engines work against smaller, reviewable units of work. | Replace developer review, QA, security review, or merge judgment. |
+
+## Sources and verification
+
+Before adopting this workflow, verify the current [Hal source repository](https://github.com/ReScienceLab/hal), [install docs](/docs/install/), [pricing status](/pricing/), and [machine-readable pricing](/pricing.md). Check release notes and engine support before relying on Hal in production work.
+

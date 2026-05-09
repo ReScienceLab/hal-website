@@ -1,10 +1,12 @@
 ---
-title: "Fresh Context Every Story - Hal Feature"
+title: "Fresh Context for AI Coding Stories | Hal"
 description: "Keep long AI coding work from turning into one drifting chat by giving each story its own bounded context window."
 h1: "Fresh context for every implementation story"
 pageType: "feature"
 order: 2
 noindex: false
+updatedAt: "2026-05-09"
+reviewedBy: "ReScience Lab"
 summary: "Long agent sessions drift. Hal keeps each story bounded so the agent receives the current task, relevant standards, and recent state—not every stale token from the whole feature."
 faqs:
   - question: "Why does fresh context matter for coding agents?"
@@ -18,6 +20,10 @@ related:
   - "archive-and-restore"
   - "project-standards"
 ---
+
+## Why does fresh context matter for AI coding stories?
+
+Fresh context matters because long agent sessions can drift across old instructions, stale assumptions, and unrelated implementation details. Hal favors bounded stories so each implementation step receives the current task, relevant standards, and recent state without dragging the entire conversation forward.
 
 ## What breaks in one long agent session
 
@@ -46,3 +52,15 @@ The agent gets enough context to act. The reviewer gets smaller checkpoints.
 ## How to review the output
 
 Review one story at a time. Confirm the changed files match the current story, the acceptance criteria are addressed, and the agent did not opportunistically modify unrelated parts of the repo.
+
+## What Hal does and does not do
+
+| Hal does | Hal does not do |
+|---|---|
+| Structures PRD-native coding loops around planning, validation, implementation, reporting, and reviewable state. | Guarantee code quality, passing tests, delivery speed, revenue, rankings, or production readiness. |
+| Helps supported engines work against smaller, reviewable units of work. | Replace developer review, QA, security review, or merge judgment. |
+
+## Sources and verification
+
+Before adopting this workflow, verify the current [Hal source repository](https://github.com/ReScienceLab/hal), [install docs](/docs/install/), [pricing status](/pricing/), and [machine-readable pricing](/pricing.md). Check release notes and engine support before relying on Hal in production work.
+

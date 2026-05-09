@@ -21,15 +21,15 @@ const features = sortFeaturesByOrder(await getCollection("features"));
     <div class="page-container">
       <div class="card-grid">
         {features.map((feature, index) => (
-          <a class="info-card" href={`/features/${featureSlug(feature)}`}>
+          <a class="info-card" href={`/features/${featureSlug(feature)}/`}>
             <p class="kicker">{String(index + 1).padStart(2, "0")} //</p>
-            <h3>{feature.data.title.replace(" - Hal Feature", "")}</h3>
+            <h3>{feature.data.h1}</h3>
             <p>{feature.data.description}</p>
           </a>
         ))}
       </div>
       <div class="btn-row">
-        <a class="btn-primary" href="/docs">Run the first loop</a>
+        <a class="btn-primary" href="/docs/first-loop/">Run the first loop</a>
         <a class="btn-ghost" href={SITE.repoUrl} target="_blank" rel="noreferrer">Inspect source</a>
       </div>
     </div>
