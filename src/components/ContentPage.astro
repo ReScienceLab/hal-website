@@ -53,12 +53,53 @@ const collectionPath = (item: Pick<Props["entry"], "id" | "collection">) => {
   const slug = item.id.replace(/\.md$/, "");
   return `/${item.collection}/${slug}/`;
 };
+const relatedCollections = ["features", "docs", "faq", "glossary", "tools"] as const;
+type RelatedCollection = typeof relatedCollections[number];
+const isRelatedCollection = (value: string): value is RelatedCollection =>
+  relatedCollections.includes(value as RelatedCollection);
+const entrySlug = (item: Pick<Props["entry"], "id">) => item.id.replace(/\.md$/, "");
+const relatedTarget = (value: string, fallbackCollection: string) => {
+  const path = value.split(/[?#]/)[0].replace(/^\/+|\/+$/g, "");
+  const segments = path.split("/").filter(Boolean);
+
+  if (segments.length === 0) {
+    return null;
+  }
+
+  if (segments.length > 1 && isRelatedCollection(segments[0])) {
+    return {
+      collection: segments[0],
+      slug: segments.slice(1).join("/"),
+    };
+  }
+
+  return isRelatedCollection(fallbackCollection)
+    ? { collection: fallbackCollection, slug: segments.join("/") }
+    : null;
+};
 let related: Props["entry"][] = [];
 
 if (entry.data.related && entry.data.related.length > 0) {
-  const all = await getCollection(collection);
+  const targetCollections = new Map<RelatedCollection, Awaited<ReturnType<typeof getCollection>>>();
+
+  await Promise.all(
+    entry.data.related.map(async (value) => {
+      const target = relatedTarget(value, collection);
+      if (target && !targetCollections.has(target.collection)) {
+        targetCollections.set(target.collection, await getCollection(target.collection));
+      }
+    })
+  );
+
   related = entry.data.related
-    .map((slug: string) => all.find((e) => e.id.replace(/\.md$/, "") === slug))
+    .map((value: string) => {
+      const target = relatedTarget(value, collection);
+      if (!target) {
+        return null;
+      }
+
+      return targetCollections.get(target.collection)?.find((e) => entrySlug(e) === target.slug);
+    })
     .filter(Boolean)
     .slice(0, 3) as Props["entry"][];
 } else if (collection === "features") {
