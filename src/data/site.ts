@@ -6,7 +6,7 @@ export const SITE = {
   repoUrl: "https://github.com/ReScienceLab/hal",
   rescienceUrl: "https://rescience.com/products/hal",
   installCommand: "brew tap j-yw/tap && brew install --cask hal",
-  version: "v0.0.8",
+  version: "v0.0.9",
 } as const;
 
 export const ROUTES = [
