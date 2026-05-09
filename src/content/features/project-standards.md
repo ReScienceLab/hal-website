@@ -1,10 +1,12 @@
 ---
-title: "Project Standards - Hal Feature"
+title: "Project Standards for AI Coding Agents | Hal"
 description: "Give each AI coding iteration the repo-specific commands, conventions, and review rules it needs to stay consistent."
 h1: "Inject project standards into each agent loop"
 pageType: "feature"
 order: 4
 noindex: false
+updatedAt: "2026-05-09"
+reviewedBy: "ReScience Lab"
 summary: "Agents default to generic patterns unless the repo tells them otherwise. Hal helps carry project standards into each story so implementation starts with local rules, not guesses."
 faqs:
   - question: "What belongs in project standards?"
@@ -18,6 +20,10 @@ related:
   - "pluggable-agent-engines"
   - "prd-driven-planning"
 ---
+
+## What are project standards for AI coding agents?
+
+Project standards are repo-specific rules, commands, conventions, and review expectations that an AI coding agent should follow during implementation. In Hal, standards help each story start with local context such as package manager, test command, architecture rules, and forbidden patterns.
 
 ## What breaks without local rules
 
@@ -47,3 +53,15 @@ The point is to make the expected way of working explicit before implementation 
 ## How to review standards
 
 Ask whether each rule changes agent behavior. “Use our existing patterns” is weak. “Use Bun commands, keep Astro content pages in `src/content`, and run `bun run build` before finishing” is stronger.
+
+## What Hal does and does not do
+
+| Hal does | Hal does not do |
+|---|---|
+| Structures PRD-native coding loops around planning, validation, implementation, reporting, and reviewable state. | Guarantee code quality, passing tests, delivery speed, revenue, rankings, or production readiness. |
+| Helps supported engines work against smaller, reviewable units of work. | Replace developer review, QA, security review, or merge judgment. |
+
+## Sources and verification
+
+Before adopting this workflow, verify the current [Hal source repository](https://github.com/ReScienceLab/hal), [install docs](/docs/install/), [pricing status](/pricing/), and [machine-readable pricing](/pricing.md). Check release notes and engine support before relying on Hal in production work.
+

@@ -7,6 +7,8 @@ order: 4
 category: "generator"
 primaryKeyword: "AGENTS.md generator"
 noindex: false
+updatedAt: "2026-05-09"
+reviewedBy: "ReScience Lab"
 summary: "Create project standards, test commands, architecture rules, and review expectations that can be copied into AGENTS.md."
 faqs:
   - question: "What is AGENTS.md?"
@@ -20,6 +22,10 @@ related:
   - "ai-coding-prd-generator"
   - "ai-coding-task-splitter"
 ---
+
+## What does an AGENTS.md generator do?
+
+An AGENTS.md generator creates repository-specific instructions for AI coding agents. It captures commands, architecture rules, conventions, forbidden patterns, and review expectations in a file that can travel with the repo, giving tools such as Codex, Claude Code, Pi, or Hal clearer local context.
 
 ## How to use the AGENTS.md generator
 
@@ -36,3 +42,12 @@ Favor instructions that change behavior: exact commands, source directories, mig
 ## Recommended workflow
 
 Commit the generated AGENTS.md, keep it short enough to maintain, and update it when review feedback reveals repeated agent mistakes.
+
+## How this tool fits the Hal workflow
+
+Use this tool before a coding agent edits files. Then move from tool output into [PRD-driven planning](/features/prd-driven-planning/), a [first Hal loop](/docs/first-loop/), or a [review-before-merge checklist](/docs/review-before-merge/). Treat generated text as a draft and verify it against the repository before use.
+
+## Verification rule
+
+Before adopting Hal, inspect the [source repository](https://github.com/ReScienceLab/hal), [install guide](/docs/install/), [pricing page](/pricing/), and [machine-readable pricing](/pricing.md). This tool does not guarantee code quality, test success, or merge safety.
+

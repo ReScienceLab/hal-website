@@ -7,6 +7,8 @@ order: 2
 category: "generator"
 primaryKeyword: "AI coding PRD generator"
 noindex: false
+updatedAt: "2026-05-09"
+reviewedBy: "ReScience Lab"
 summary: "Answer a few product and technical questions, then generate a markdown PRD that is structured for reviewable AI coding loops."
 faqs:
   - question: "What does the PRD generator create?"
@@ -20,6 +22,10 @@ related:
   - "acceptance-criteria-generator"
   - "ai-coding-task-splitter"
 ---
+
+## What does an AI coding PRD generator create?
+
+An AI coding PRD generator turns a feature idea into a structured markdown requirement with user context, scope, constraints, stories, acceptance criteria, and review notes. The result is meant to be reviewed by a developer before it becomes input for Hal or an AI coding agent.
 
 ## How to use the PRD generator
 
@@ -36,3 +42,12 @@ Confirm the PRD names the user, defines in-scope and out-of-scope behavior, incl
 ## Recommended workflow
 
 Generate the PRD, run it through the PRD Readiness Checker, split risky work into smaller stories, then use the final markdown as the source for a small Hal loop.
+
+## How this tool fits the Hal workflow
+
+Use this tool before a coding agent edits files. Then move from tool output into [PRD-driven planning](/features/prd-driven-planning/), a [first Hal loop](/docs/first-loop/), or a [review-before-merge checklist](/docs/review-before-merge/). Treat generated text as a draft and verify it against the repository before use.
+
+## Verification rule
+
+Before adopting Hal, inspect the [source repository](https://github.com/ReScienceLab/hal), [install guide](/docs/install/), [pricing page](/pricing/), and [machine-readable pricing](/pricing.md). This tool does not guarantee code quality, test success, or merge safety.
+

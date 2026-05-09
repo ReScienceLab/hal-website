@@ -7,6 +7,8 @@ order: 5
 category: "analyzer"
 primaryKeyword: "AI coding task splitter"
 noindex: false
+updatedAt: "2026-05-09"
+reviewedBy: "ReScience Lab"
 summary: "Paste a coding task and get a risk score, suggested story breakdown, review checkpoints, and a safer Hal loop sequence."
 faqs:
   - question: "Why split AI coding tasks?"
@@ -20,6 +22,10 @@ related:
   - "ai-coding-prd-generator"
   - "acceptance-criteria-generator"
 ---
+
+## What does an AI coding task splitter do?
+
+An AI coding task splitter breaks a broad feature request into smaller implementation stories and flags risky work. It helps developers avoid handing an agent a sprawling task by creating reviewable steps, acceptance checkpoints, and a safer sequence for a Hal-style coding loop.
 
 ## How to use the task splitter
 
@@ -36,3 +42,12 @@ The score is a planning signal, not a permission slip. Use it to decide whether 
 ## Recommended workflow
 
 Split the task, turn the highest-priority story into a PRD, validate the PRD, then run a small loop and inspect the result.
+
+## How this tool fits the Hal workflow
+
+Use this tool before a coding agent edits files. Then move from tool output into [PRD-driven planning](/features/prd-driven-planning/), a [first Hal loop](/docs/first-loop/), or a [review-before-merge checklist](/docs/review-before-merge/). Treat generated text as a draft and verify it against the repository before use.
+
+## Verification rule
+
+Before adopting Hal, inspect the [source repository](https://github.com/ReScienceLab/hal), [install guide](/docs/install/), [pricing page](/pricing/), and [machine-readable pricing](/pricing.md). This tool does not guarantee code quality, test success, or merge safety.
+

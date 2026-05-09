@@ -7,6 +7,8 @@ order: 1
 category: "analyzer"
 primaryKeyword: "PRD readiness checker"
 noindex: false
+updatedAt: "2026-05-09"
+reviewedBy: "ReScience Lab"
 summary: "Paste a PRD or feature brief and get a readiness score, missing sections, vague-language warnings, and a Hal-ready improvement checklist."
 faqs:
   - question: "Do I need to install Hal to use the PRD checker?"
@@ -20,6 +22,10 @@ related:
   - "acceptance-criteria-generator"
   - "ai-coding-task-splitter"
 ---
+
+## What does a PRD readiness checker do?
+
+A PRD readiness checker reviews whether a requirement is specific enough for AI coding. It looks for scope, users, constraints, acceptance criteria, edge cases, and review points before an agent edits files. The output helps developers tighten a PRD before using Hal or another coding workflow.
 
 ## How to use this PRD checker
 
@@ -36,3 +42,12 @@ Use the checker before `hal plan`, before assigning a task to a coding agent, or
 ## Next step
 
 If the score is low, use the recommended fixes or send the brief through the AI Coding PRD Generator to turn it into a more complete markdown PRD.
+
+## How this tool fits the Hal workflow
+
+Use this tool before a coding agent edits files. Then move from tool output into [PRD-driven planning](/features/prd-driven-planning/), a [first Hal loop](/docs/first-loop/), or a [review-before-merge checklist](/docs/review-before-merge/). Treat generated text as a draft and verify it against the repository before use.
+
+## Verification rule
+
+Before adopting Hal, inspect the [source repository](https://github.com/ReScienceLab/hal), [install guide](/docs/install/), [pricing page](/pricing/), and [machine-readable pricing](/pricing.md). This tool does not guarantee code quality, test success, or merge safety.
+
