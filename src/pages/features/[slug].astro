@@ -15,7 +15,7 @@ const { entry } = Astro.props;
 const allFeatures = sortFeaturesByOrder(await getCollection("features"));
 const entrySlug = featureSlug(entry);
 const featureIndex = allFeatures.findIndex((f) => featureSlug(f) === entrySlug) + 1;
-const path = `/features/${entrySlug}`;
+const path = `/features/${entrySlug}/`;
 ---
 
 <ContentPage

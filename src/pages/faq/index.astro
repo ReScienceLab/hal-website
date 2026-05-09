@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+
+const entries = (await getCollection("faq")).filter((entry) => !entry.data.noindex);
+---
+<Layout title="Hal FAQ - AI Coding Loop Questions" description="Answers to common questions about Hal, PRD-native development, supported engines, and reviewable AI-generated code." path="/faq">
+  <SiteNav />
+  <section class="page-hero">
+    <div class="page-container">
+      <p class="eyebrow">FAQ</p>
+      <h1>Hal FAQ</h1>
+      <p>Answers to common questions about Hal, PRD-native development, supported engines, and reviewable AI-generated code.</p>
+    </div>
+  </section>
+  <section class="page-section">
+    <div class="page-container">
+      <div class="card-grid">
+        {entries.map((entry) => (
+          <a class="info-card" href={`/faq/${entry.id.replace(/\.md$/, "")}/`}>
+            <h3>{entry.data.h1}</h3>
+            <p>{entry.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <SiteFooter />
+</Layout>

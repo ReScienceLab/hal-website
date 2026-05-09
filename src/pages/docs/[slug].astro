@@ -1,0 +1,17 @@
+---
+import { getCollection } from "astro:content";
+import ContentPage from "../../components/ContentPage.astro";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("docs");
+  return entries.map((entry) => ({
+    params: { slug: entry.id.replace(/\.md$/, "") },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const path = `/docs/${entry.id.replace(/\.md$/, "")}/`;
+---
+
+<ContentPage entry={entry} path={path} eyebrow="Docs" />

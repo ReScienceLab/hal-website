@@ -9,11 +9,11 @@ const faqs = [
   { question: "Do I still pay for AI model usage?", answer: "Hal can use external AI coding engines. Any costs or limits from those tools are separate from this website and depend on the engine you configure." },
   { question: "What should I verify before adopting Hal?", answer: `Inspect the source, license, releases, install path, and docs in the GitHub repository at ${SITE.repoUrl}.` },
 ];
-const lastUpdated = "2026-05-04";
+const lastUpdated = "2026-05-09";
 const schema = [
   {
     "@type": "Offer",
-    "@id": `${SITE.domain}/pricing#offer`,
+    "@id": `${SITE.domain}/pricing/#offer`,
     price: "0",
     priceCurrency: "USD",
     url: `${SITE.domain}/pricing`,
@@ -22,7 +22,7 @@ const schema = [
   },
   {
     "@type": "FAQPage",
-    "@id": `${SITE.domain}/pricing#faq`,
+    "@id": `${SITE.domain}/pricing/#faq`,
     mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })),
   },
 ];
@@ -37,7 +37,7 @@ const schema = [
       <p class="hero-meta">Last updated: {lastUpdated} · <a href="/pricing.md">Read machine-readable pricing</a></p>
       <div class="btn-row">
         <a class="btn-primary" href={SITE.repoUrl} target="_blank" rel="noreferrer">Inspect source and license</a>
-        <a class="btn-ghost" href="/docs">Run the first loop</a>
+        <a class="btn-ghost" href="/docs/first-loop/">Run the first loop</a>
       </div>
     </div>
   </section>

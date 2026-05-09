@@ -4,7 +4,7 @@ import Layout from "../../layouts/Layout.astro";
 import SiteNav from "../../components/SiteNav.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import { sortToolsByOrder, toolSlug } from "../../data/tools";
-import { SITE } from "../../data/site";
+import { SITE, absoluteUrl } from "../../data/site";
 
 const tools = sortToolsByOrder(await getCollection("tools"));
 const schema = {
@@ -15,7 +15,7 @@ const schema = {
   hasPart: tools.map((tool) => ({
     "@type": "WebApplication",
     name: tool.data.h1,
-    url: `${SITE.domain}/tools/${toolSlug(tool)}`,
+    url: absoluteUrl(`/tools/${toolSlug(tool)}`),
     applicationCategory: "DeveloperApplication",
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   })),
@@ -30,8 +30,8 @@ const schema = {
       <h1>Free AI coding tools for PRDs and agent loops</h1>
       <p>Prepare the work before an AI coding agent touches your repo. Check PRDs, generate acceptance criteria, write AGENTS.md instructions, and split risky tasks into reviewable stories.</p>
       <div class="btn-row">
-        <a class="btn-primary" href="/tools/prd-readiness-checker">Check a PRD first</a>
-        <a class="btn-ghost" href="/docs">Run the Hal loop</a>
+        <a class="btn-primary" href="/tools/prd-readiness-checker/">Check a PRD first</a>
+        <a class="btn-ghost" href="/docs/first-loop/">Run the Hal loop</a>
       </div>
     </div>
   </section>
@@ -40,7 +40,7 @@ const schema = {
     <div class="page-container">
       <div class="card-grid">
         {tools.map((tool) => (
-          <a class="info-card" href={`/tools/${toolSlug(tool)}`}>
+          <a class="info-card" href={`/tools/${toolSlug(tool)}/`}>
             <p class="kicker">{tool.data.category}</p>
             <h3>{tool.data.h1}</h3>
             <p>{tool.data.description}</p>
