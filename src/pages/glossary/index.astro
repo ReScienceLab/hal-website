@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import SiteNav from "../../components/SiteNav.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+
+const entries = (await getCollection("glossary")).filter((entry) => !entry.data.noindex);
+---
+<Layout title="Hal Glossary - AI Coding Workflow Terms" description="Definitions for PRD-native development, agentic coding workflows, acceptance criteria, and reviewable AI coding loops." path="/glossary">
+  <SiteNav />
+  <section class="page-hero">
+    <div class="page-container">
+      <p class="eyebrow">Glossary</p>
+      <h1>AI coding workflow glossary</h1>
+      <p>Definitions for PRD-native development, agentic coding workflows, acceptance criteria, and reviewable AI coding loops.</p>
+    </div>
+  </section>
+  <section class="page-section">
+    <div class="page-container">
+      <div class="card-grid">
+        {entries.map((entry) => (
+          <a class="info-card" href={`/glossary/${entry.id.replace(/\.md$/, "")}/`}>
+            <h3>{entry.data.h1}</h3>
+            <p>{entry.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <SiteFooter />
+</Layout>

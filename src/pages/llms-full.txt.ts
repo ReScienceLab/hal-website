@@ -21,6 +21,7 @@ interface PlainContentEntry {
   data: {
     h1: string;
     description: string;
+    noindex?: boolean;
   };
 }
 
@@ -35,11 +36,11 @@ function collectionList(entries: PlainContentEntry[], basePath: string) {
 }
 
 export const GET: APIRoute = async () => {
-  const features = sortFeaturesByOrder(await getCollection("features"));
-  const tools = sortToolsByOrder(await getCollection("tools"));
-  const docs = await getCollection("docs");
-  const faq = await getCollection("faq");
-  const glossary = await getCollection("glossary");
+  const features = sortFeaturesByOrder(await getCollection("features")).filter((entry) => !entry.data.noindex);
+  const tools = sortToolsByOrder(await getCollection("tools")).filter((entry) => !entry.data.noindex);
+  const docs = (await getCollection("docs")).filter((entry) => !entry.data.noindex);
+  const faq = (await getCollection("faq")).filter((entry) => !entry.data.noindex);
+  const glossary = (await getCollection("glossary")).filter((entry) => !entry.data.noindex);
   const pages = ROUTES.map((route) => `- ${absoluteUrl(route.path)} [${route.pageType}] — ${route.description}`).join("\n");
   const featuresList = features.map((feature) => [
     `## ${feature.data.h1}`,
